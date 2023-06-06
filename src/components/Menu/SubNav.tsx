@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ButtonMenu, ButtonMenuItem ,Flex} from '@pancakeswap/uikit'
+import { ButtonMenu, ButtonMenuItem, Flex } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -37,10 +37,10 @@ const StyledNav = styled.nav`
   }
 `
 const defaultStyle = {
- 
+
 }
-const styleActive = { 
-  color: `${({ theme }) => theme.colors.secondary}`, 
+const styleActive = {
+  color: `${({ theme }) => theme.colors.secondary}`,
   background: '#5DCB83',
   boxsizing: 'border-box',
   borderradius: '20px 20px 0px 0px'
@@ -94,7 +94,7 @@ const WrapAppBody = styled.div`
 `
 const getActiveIndex = (pathname: string): number => {
   if (
-     pathname.includes('/liquidity') || pathname.includes('/add') || pathname.includes('/find') || pathname.includes('/remove')
+    pathname.includes('/liquidity') || pathname.includes('/add') || pathname.includes('/find') || pathname.includes('/remove')
   ) {
     return 1
   }
@@ -105,31 +105,31 @@ const Nav = () => {
   const { pathname } = useRouter()
   const { t } = useTranslation()
   const activeIndex = getActiveIndex(pathname)
-  
+
   return (
     <Wrapper>
-    <WrapAppBody>
-    <CsStyledNav>     
-        <WrapLink style={activeIndex === 0 ? styleActive : defaultStyle}>
-          <Link href="/swap" passHref>
+      <WrapAppBody>
+        <CsStyledNav>
+          <WrapLink style={activeIndex === 0 ? styleActive : defaultStyle}>
+            <Link href="/swap" passHref>
               <CustomNavLink style={activeIndex === 0 ? styleActive : defaultStyle}>
-                  <Strong>
-                    {t('Swap')}
-                  </Strong>
+                <Strong>
+                  {t('Swap')}
+                </Strong>
               </CustomNavLink>
-          </Link>
-        </WrapLink>
-        <WrapLink style={activeIndex === 1 ? styleActive : defaultStyle}>
-          <Link href="/liquidity" passHref>
-            <CustomNavLink style={activeIndex === 1 ? styleActive : defaultStyle}>
-              <Strong>
-                {t('Liquidity')}
-              </Strong>
-            </CustomNavLink>
-          </Link>
-        </WrapLink>
-    </CsStyledNav>
-    </WrapAppBody>
+            </Link>
+          </WrapLink>
+          <WrapLink style={activeIndex === 1 ? styleActive : defaultStyle}>
+            <Link href="/liquidity" passHref>
+              <CustomNavLink style={activeIndex === 1 ? styleActive : defaultStyle}>
+                <Strong>
+                  {t('Liquidity')}
+                </Strong>
+              </CustomNavLink>
+            </Link>
+          </WrapLink>
+        </CsStyledNav>
+      </WrapAppBody>
     </Wrapper>
   )
 }

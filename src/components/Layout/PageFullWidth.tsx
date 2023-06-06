@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { DEFAULT_META, getCustomMeta } from 'config/constants/meta';
 import { useRouter } from 'next/router';
 
-const PageMeta = () => {                                                                                                                  
+const PageMeta = () => {
   const {
     t,
     currentLanguage: { locale },
@@ -15,11 +15,11 @@ const PageMeta = () => {
   const pageMeta = getCustomMeta(pathname, t, locale) || {}
   const { title, description, image } = { ...DEFAULT_META, ...pageMeta }
   const pageTitle = title
-  
+
   return (
     <MetaTags>
       <title>{pageTitle}</title>
-      <meta name="description" content={description}/>
+      <meta name="description" content={description} />
       <meta property="og:title" content={title} />
       <meta property="og:image" content={image} />
     </MetaTags>
@@ -28,10 +28,10 @@ const PageMeta = () => {
 
 const PageFullWidth: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   return (
-        <Wrapper>
-            <PageMeta />
-            {children}
-        </Wrapper>
+    <Wrapper>
+      <PageMeta />
+      {children}
+    </Wrapper>
   )
 }
 

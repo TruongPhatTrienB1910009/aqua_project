@@ -188,7 +188,7 @@ export const bscTest: Chain = {
     symbol: 'tBNB',
   },
   rpcUrls: {
-    public: 'https://data-seed-prebsc-2-s2.binance.org:8545', 
+    public: 'https://data-seed-prebsc-2-s2.binance.org:8545',
     default: 'https://data-seed-prebsc-2-s2.binance.org:8545',
   },
   blockExplorers: {

@@ -28,7 +28,8 @@ const StyledNav = styled.nav`
   align-items: center;
   width: 100%;
   height: ${MENU_HEIGHT}px;
-  background-color: ${({ theme }) => theme.colors.background};
+  // background-color: ${({ theme }) => theme.colors.background};
+  background: #1b3252;
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
   transform: translate3d(0, 0, 0);
   padding-left: 16px;
@@ -134,7 +135,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
             <Flex>
               <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
               {windowSize > 1024 && (
-                  <MenuItems items={links} activeItem={activeItem} activeSubItem={activeSubItem} ml="24px" />
+                <MenuItems items={links} activeItem={activeItem} activeSubItem={activeSubItem} ml="24px" />
               )}
             </Flex>
             <Flex alignItems="center" height="100%">
@@ -143,7 +144,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
                   <CakePrice showSkeleton={false} cakePriceUsd={cakePriceUsd} />
                 </Box>
               )}
-              { ( currentLang && langs && setLang ) && 
+              {(currentLang && langs && setLang) &&
                 <Box mt="4px">
                   <LangSelector
                     currentLang={currentLang}

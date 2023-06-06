@@ -4,7 +4,8 @@ import { Box, Flex } from "../Box";
 import SocialLinks from "./Components/SocialLinks";
 
 export const StyledFooter = styled(Flex)`
-  background: ${({ theme }) => theme.colors.background};
+  // background: ${({ theme }) => theme.colors.background};
+  background: #1b3252;
   @media only screen and (max-width: 600px) {
     margin-bottom: 0px !important;
     padding-top: 20px !important;

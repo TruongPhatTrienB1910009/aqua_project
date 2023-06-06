@@ -6,7 +6,7 @@ import Container from 'components/Layout/Container';
 import PageHeader from 'components/PageHeader'
 import styled from 'styled-components';
 import InventoryOffChain from './components/InventoryOffChain';
-  
+
 interface Props {
     activeIndex: string
 }
@@ -15,7 +15,7 @@ const Inventory: React.FC<Props> = () => {
     const { t } = useTranslation()
     return (
         <Page>
-            <PageHeader mt="1rem">
+            {/* <PageHeader mt="1rem">
                 <Flex justifyContent="space-between" flexDirection={['column', null, null, 'row']}>
                     <Flex flex="1" flexDirection="column" mr={['8px', 0]}>
                         <Heading as="h1" scale="xxl" mb="24px">
@@ -26,9 +26,9 @@ const Inventory: React.FC<Props> = () => {
                         </Heading>
                     </Flex>
                 </Flex>
-            </PageHeader>
+            </PageHeader> */}
             <CustomContainer>
-                <InventoryOffChain/>
+                <InventoryOffChain />
             </CustomContainer>
         </Page>
     );
@@ -39,6 +39,7 @@ export default Inventory
 const CustomContainer = styled(Container)`
     width:100%;
     height: auto;
+    background-color: transparent;
     @media only screen and (max-width: 768px) {
         padding-left:10px;
         padding-right: 10px;
@@ -56,7 +57,7 @@ const CsFlex = styled(Flex)`
         width: 100%;
         gap: 20px;
     }
-` 
+`
 const CustomRow = styled(Flex)`
     flex-wrap:wrap;
     @media only screen and (max-width:1080px) {
@@ -84,7 +85,7 @@ const CotainerTabAll = styled.div`
         justify-content: center;
     }
 `
-const CustomTabAll = styled(Button)<{isActive?:boolean}>`
+const CustomTabAll = styled(Button) <{ isActive?: boolean }>`
     width: auto;
     background:none;
     box-shadow: none;
@@ -106,7 +107,7 @@ const CustomTabAll = styled(Button)<{isActive?:boolean}>`
         border-bottom:${({ isActive }) => isActive ? "3px solid #4B19F5" : "1px solid #c4c6d073"}; 
     }
 `
-const CustomTab = styled(Button)<{isActive?:boolean}>`
+const CustomTab = styled(Button) <{ isActive?: boolean }>`
     width: auto;
     background:none;
     box-shadow: none;

@@ -45,11 +45,20 @@ interface PageProps extends React.HTMLAttributes<HTMLDivElement> {
   symbol?: string
 }
 
+const mystyle = {
+  backgroundImage: `url("https://img.freepik.com/free-photo/underwater-adventure-blue-sea-life-reef-fish-generative-ai_188544-12760.jpg?w=1060&t=st=1685941191~exp=1685941791~hmac=2650cc56ecce50a01b9937906de2ac66114416012248699abdb3e51fdf11eca1")`,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+};
+
 const Page: React.FC<React.PropsWithChildren<PageProps>> = ({ children, symbol, ...props }) => {
   return (
     <>
-      <PageMeta symbol={symbol} />
-      <StyledPage {...props}>{children}</StyledPage>
+      <div style={mystyle}>
+        <PageMeta symbol={symbol} />
+        <StyledPage {...props}>{children}</StyledPage>
+      </div>
     </>
   )
 }

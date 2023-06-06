@@ -37,8 +37,8 @@ class MyDocument extends Document {
             <link rel="preconnect" href={process.env.NEXT_PUBLIC_NODE_PRODUCTION} />
           )}
           <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet"/>
-          <link rel="shortcut icon" href="/favicon.ico" />
+          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet" />
+          {/* <link rel="shortcut icon" href="/favicon.ico" /> */}
           <link rel="apple-touch-icon" href="/logo.png" />
           <link rel="manifest" href="/manifest.json" />
         </Head>

@@ -1,7 +1,7 @@
 
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker'
 import { useTranslation } from '@pancakeswap/localization'
-import { Flex, Text, Progress, Heading, Box, Button, Input, Skeleton  } from '@pancakeswap/uikit'
+import { Flex, Text, Progress, Heading, Box, Button, Input, Skeleton } from '@pancakeswap/uikit'
 import Container from 'components/Layout/Container'
 import Page from 'components/Layout/Page'
 import { useEffect, useState } from 'react'
@@ -21,59 +21,59 @@ import { GetPaidToken, GetPresaleInfo } from './hook/fetchData'
 
 function getDateNow(event?: any) {
     let today: any
-    if(event) {
+    if (event) {
         today = new Date(event);
         const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0'); 
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
         const yyyy = today.getFullYear();
         today = `${yyyy}-${mm}-${dd}`;
     }
     else {
         today = new Date();
         const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0'); 
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
         const yyyy = today.getFullYear();
         today = `${yyyy}-${mm}-${dd}`;
-    }    
+    }
     return today;
 }
 
 interface Props {
-    start?: number 
-    now?: number 
-    end?: number 
+    start?: number
+    now?: number
+    end?: number
 }
-const Status:React.FC<Props> = ({start, end}) => {
+const Status: React.FC<Props> = ({ start, end }) => {
     const now = Math.floor(Date.now() / 1000);
     if (now > end) {
-        return  <Heading mb="8px" size="md" >Status: End</Heading>
+        return <Heading mb="8px" size="md" >Status: End</Heading>
     }
     if (now > start && now < end) {
-        return  <Heading mb="8px" size="md" >Status: Live</Heading>
-    } 
-    return  <Heading mb="8px" size="md" >Status: Coming soon</Heading>
+        return <Heading mb="8px" size="md" >Status: Live</Heading>
+    }
+    return <Heading mb="8px" size="md" >Status: Coming soon</Heading>
 }
 
 const Launchpad = () => {
     const { t } = useTranslation()
-    const [ invalidBuyTime, setInvalidBuyTime ] = useState(false)
+    const [invalidBuyTime, setInvalidBuyTime] = useState(false)
     const { account, chainId } = useActiveWeb3React()
-    const coreBalance = useBalance({ addressOrName: account,chainId: ChainId.CORE, cacheTime: 10000 })
-    const [ refresh, setRefresh ] = useState(0)
-    function onRefresh(newValue:number){
+    const coreBalance = useBalance({ addressOrName: account, chainId: ChainId.CORE, cacheTime: 10000 })
+    const [refresh, setRefresh] = useState(0)
+    function onRefresh(newValue: number) {
         setRefresh(newValue)
     }
 
-    const [ cdc, setCdc ] = useState(800)
-    const [ balance, setBalance ] = useState('10')
-    const [ purchasePercent, setPurchasePercent ] = useState(0)
+    const [cdc, setCdc] = useState(800)
+    const [balance, setBalance] = useState('10')
+    const [purchasePercent, setPurchasePercent] = useState(0)
 
     const { handleBuy, requestedBuy, pendingBuy, isCloseBuy } = useBuyPresale(chainId, onRefresh, balance)
     const { handleClaim, requestedClaim, pendingClaim } = useClaimPresale(chainId, onRefresh)
 
-    const [ invalidInput, setInvalidInput ] = useState(false)
-    const { paidToken } =  GetPaidToken(chainId, account, refresh)
-    const { presaleInfo } =  GetPresaleInfo(chainId, refresh)
+    const [invalidInput, setInvalidInput] = useState(false)
+    const { paidToken } = GetPaidToken(chainId, account, refresh)
+    const { presaleInfo } = GetPresaleInfo(chainId, refresh)
     const maxAllocation = presaleInfo?.maxAllocation ?? 0;
 
     useFastRefreshEffect(() => {
@@ -86,16 +86,16 @@ const Launchpad = () => {
                     setInvalidBuyTime(true)
                 }
             }
-            catch(error) {
+            catch (error) {
                 console.log(error)
             }
         }
         getSimpleSellIetms()
-        console.log(`invalidBuyTime`,invalidBuyTime);
-        
-      }, [refresh, chainId])
-    
-    function onInputPurchase (event: React.ChangeEvent<HTMLInputElement>) {
+        console.log(`invalidBuyTime`, invalidBuyTime);
+
+    }, [refresh, chainId])
+
+    function onInputPurchase(event: React.ChangeEvent<HTMLInputElement>) {
         const value = Number(event.target.value)
         setBalance(value.toString())
         setCdc(Number(value) * 80)
@@ -110,14 +110,14 @@ const Launchpad = () => {
         handleBuy(balance)
     }
 
-    function processPercent( value) {
+    function processPercent(value) {
         return (value * 100) / maxAllocation;
     }
 
     const vestingArray = [
-        {index: 1, name: 'TGE', vesting: '50%', time: '24 April 2023 15:00:00 UTC' , amount: (paidToken?.paidBalance * 50)/100, claimable: paidToken?.nextStageIndex === 0 },
-        {index: 2, name: 'Stage 1', vesting: '25%', time: '24 May 2023 15:00:00 UTC' , amount: (paidToken?.paidBalance * 25)/100, claimable: paidToken?.nextStageIndex=== 1},
-        {index: 3, name: 'Stage 2', vesting: '25%', time: '24 June 2023 15:00:00 UTC' , amount: (paidToken?.paidBalance * 25)/100, claimable: paidToken?.nextStageIndex === 2}
+        { index: 1, name: 'TGE', vesting: '50%', time: '24 April 2023 15:00:00 UTC', amount: (paidToken?.paidBalance * 50) / 100, claimable: paidToken?.nextStageIndex === 0 },
+        { index: 2, name: 'Stage 1', vesting: '25%', time: '24 May 2023 15:00:00 UTC', amount: (paidToken?.paidBalance * 25) / 100, claimable: paidToken?.nextStageIndex === 1 },
+        { index: 3, name: 'Stage 2', vesting: '25%', time: '24 June 2023 15:00:00 UTC', amount: (paidToken?.paidBalance * 25) / 100, claimable: paidToken?.nextStageIndex === 2 }
     ];
 
     console.log(paidToken);
@@ -126,57 +126,57 @@ const Launchpad = () => {
         <Page>
             <PageHeader mt="1rem">
                 <Flex justifyContent="space-between" flexDirection={['column', null, null, 'row']}>
-                <Flex flex="1" flexDirection="column" mr={['8px', 0]}>
-                    <Heading as="h1" scale="xxl" mb="24px">
-                    {t('Pre-Sale')}
-                    </Heading>
-                    <Heading scale="md" color="text">
-                    {t('CoreDoge - A Multi GameFi for CoreDAO Enthusiasts')}
-                    </Heading>
-                </Flex>
+                    <Flex flex="1" flexDirection="column" mr={['8px', 0]}>
+                        <Heading as="h1" scale="xxl" mb="24px">
+                            {t('Pre-Sale')}
+                        </Heading>
+                        <Heading scale="md" color="text">
+                            {t('CoreDoge - A Multi GameFi for CoreDAO Enthusiasts')}
+                        </Heading>
+                    </Flex>
                 </Flex>
             </PageHeader>
             <CustomContainer>
                 <Flex width="100%" flexWrap="wrap" mt="1rem" mb="1rem">
-                    <Box mb="16px"  width="100%" >
-                        <Status start={presaleInfo?.startBuyTime} end={presaleInfo?.endBuyTime}/>
-                        <Progress bgcolor="#3E54AC" primaryStep={processPercent(presaleInfo?.totalOfPaid ?? 0)} variant="round"/>
+                    <Box mb="16px" width="100%" >
+                        <Status start={presaleInfo?.startBuyTime} end={presaleInfo?.endBuyTime} />
+                        <Progress bgcolor="#3E54AC" primaryStep={processPercent(presaleInfo?.totalOfPaid ?? 0)} variant="round" />
                     </Box>
-                    <Box mb="16px"  width="100%" >
+                    <Box mb="16px" width="100%" >
                         <Text fontSize="12px">Purchased: {presaleInfo?.totalOfPaid ? (presaleInfo?.totalOfPaid).toLocaleString(undefined, { minimumFractionDigits: 2 }) : 0} $CDC</Text>
                         <Text fontSize="12px">Available: {presaleInfo?.maxAllocation ? (presaleInfo?.maxAllocation - (presaleInfo?.totalOfPaid)).toLocaleString(undefined, { minimumFractionDigits: 2 }) : 0} $CDC</Text>
                     </Box>
                 </Flex>
                 <Flex width="100%" flexWrap="wrap" mt="1rem" mb="2.25rem">
                     <ContainerCard>
-                        <CardOnChain/>
+                        <CardOnChain />
                     </ContainerCard>
                     <ContainerCard>
-                        <CardOffChain/>
+                        <CardOffChain />
                     </ContainerCard>
                 </Flex>
 
                 {
                     paidToken?.isWhitelist ?
-                    <>
+                        <>
+                            <Flex width="100%" justifyContent='center' flexWrap="wrap" mt="1rem" mb="1rem">
+                                <Input disabled={pendingBuy || invalidBuyTime} min="10" max="200" width="500px" type="number" scale="md" onChange={onInputPurchase} value={balance} />
+                            </Flex>
+                            <Flex width="100%" justifyContent='center' flexWrap="wrap" mt="1rem" mb="1rem">
+                                <Button disabled={invalidInput || pendingBuy || invalidBuyTime} onClick={buyPresale}>
+                                    PURCHASE {Number(balance).toLocaleString(undefined, { minimumFractionDigits: 2 })} CORE ~ {cdc.toLocaleString(undefined, { minimumFractionDigits: 2 })} $CDC
+                                    <RingLoader color="white" loading={pendingBuy} size={30} />
+                                </Button>
+                            </Flex>
+                            <Flex width="100%" justifyContent='center' flexWrap="wrap" mt="1rem" mb="1rem">
+                                <Text color='#12575e' fontSize="16px">You are in whitelist</Text>
+                            </Flex>
+                        </>
+                        :
                         <Flex width="100%" justifyContent='center' flexWrap="wrap" mt="1rem" mb="1rem">
-                            <Input disabled={pendingBuy || invalidBuyTime} min="10" max="200" width="500px" type="number" scale="md" onChange={onInputPurchase} value={balance} />
+                            <Text color='#FF0000' fontSize="16px">You are not in whitelist</Text>
+                            {/* <Skeleton height="22px" width="60px" /> */}
                         </Flex>
-                        <Flex width="100%" justifyContent='center' flexWrap="wrap" mt="1rem" mb="1rem">
-                            <Button disabled={invalidInput || pendingBuy || invalidBuyTime} onClick={buyPresale}>
-                                PURCHASE {Number(balance).toLocaleString(undefined, { minimumFractionDigits: 2 })} CORE ~ {cdc.toLocaleString(undefined, { minimumFractionDigits: 2 })} $CDC
-                                <RingLoader color="white" loading={pendingBuy} size={30} />
-                            </Button>
-                        </Flex>
-                        <Flex width="100%" justifyContent='center' flexWrap="wrap" mt="1rem" mb="1rem">
-                            <Text color='#12575e' fontSize="16px">You are in whitelist</Text>
-                        </Flex>
-                    </>
-                    :
-                    <Flex width="100%" justifyContent='center' flexWrap="wrap" mt="1rem" mb="1rem">
-                        <Text color='#FF0000' fontSize="16px">You are not in whitelist</Text>
-                        {/* <Skeleton height="22px" width="60px" /> */}
-                    </Flex>
                 }
                 <Flex width="100%" justifyContent='center' flexWrap="wrap" mt="1rem" mb="1rem">
                     {invalidInput && <Text color='#FF0000' fontSize="12px">Your input invalid, amount have to greater 10 and less than 200 CORE</Text>}
@@ -188,8 +188,8 @@ const Launchpad = () => {
                         <Text fontSize="16px">Your balance: {formatBigNumber(coreBalance.data.value, 2)} CORE</Text>
                     )}
                 </Flex>
-                <Flex width="100%" mt="1rem" height="fit-content"> 
-                    <ContainerOnChain currentIndex={paidToken?.nextStageIndex ?? 0} allowanceVesting={vestingArray}/>
+                <Flex width="100%" mt="1rem" height="fit-content">
+                    <ContainerOnChain currentIndex={paidToken?.nextStageIndex ?? 0} allowanceVesting={vestingArray} />
                 </Flex>
             </CustomContainer>
         </Page>

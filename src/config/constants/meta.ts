@@ -5,7 +5,7 @@ import { PageMeta } from './types'
 export const DEFAULT_META: PageMeta = {
   title: `CoreDoge - A Multi GameFi for CoreDAO Enthusiasts`,
   image: 'https://coredoge.xyz/opengraph.jpg',
-  description:"CoreDoge is a Reward and GameFi Platform Token that leverages the popularity of CoreDAO to create an immersive gaming experience."
+  description: "CoreDoge is a Reward and GameFi Platform Token that leverages the popularity of CoreDAO to create an immersive gaming experience."
 }
 
 interface PathList {

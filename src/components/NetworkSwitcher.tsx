@@ -67,7 +67,7 @@ const WrongNetworkSelect = ({ switchNetwork, chainId }) => {
     },
   )
   const { chain } = useNetwork()
-  const localChainId =  ChainId.CORE
+  const localChainId = ChainId.CORE
   const [, setSessionChainId] = useSessionChainId()
   const localChainName = chains.find((c) => c.id === localChainId)?.name ?? 'CORE'
 

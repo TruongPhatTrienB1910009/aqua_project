@@ -38,7 +38,7 @@ export function PageNetworkSupportModal() {
       image: activeSubMenuItem?.image || activeMenuItem?.image,
     }
   }, [menuItems, pathname])
-  function handleClick(){
+  function handleClick() {
     logout().then(() => {
       push('/')
       switchNetworkLocal(ChainId.BSC)

@@ -13,7 +13,7 @@ import {
 } from "@pancakeswap/uikit";
 import { useTranslation } from "@pancakeswap/localization";
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { renderBGCard } from "utils/renderBGCard";
 
 
@@ -24,9 +24,7 @@ interface PropsCard {
     nftPrice?: any
     nftDesc?: any
     nftType?: string
-    onHandleBuyNft?: any
-    handleApprove?: any
-    allowance?: number
+    onClaimNFT?: any
     balanceOfToken?: number
 }
 
@@ -37,62 +35,63 @@ const CardAquaDream: React.FC<PropsCard> = ({
     nftType,
     nftPrice,
     nftDesc,
-    onHandleBuyNft,
-    handleApprove,
-    allowance,
+    onClaimNFT,
     balanceOfToken
 }) => {
     return (
         <>
             <Container>
-                <Flex width="100%" flexDirection="column">
+                <CustomCard>
                     <ImgShoes src={nftImage} alt='Image Box' />
                     <CustomText >
                         {nftName}
                     </CustomText>
-                    <CustomText >
-                        {nftDesc}
-                    </CustomText>
-                    <CustomText >
-                        {nftPrice}
-                    </CustomText>
-                </Flex>
-            </Container>
+                    {
+                        (Number(nftType) !== 0) ? (<Button onClick={onClaimNFT}>Claim {nftPrice}</Button>) : ''
+                    }
+                </CustomCard>
+            </Container >
         </>
     );
 };
 
 export default CardAquaDream;
 
+
 const Container = styled.div<{ isHaving?: boolean, background?: string }>`
     width: 360px;
     min-height: 460px;
-    padding: 15px 10px 15px 10px;
+    overflow: hidden;
     border-radius: 10px;
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     @media screen and (max-width: 600px){
-        padding: 15px 0px 15px 0px;
+       
     }
     
     background-color: #3f7a8a;
     background-image: ${(props) => (props.background)};
 `
+
 const CustomCard = styled.div<{ background?: string }>`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
-    height: 280px;
+    height: auto;
     border-radius: 8px;
     position: relative;
     justify-content: center;
     align-items: center;
+    border: 3px solid #ccc;
+    overflow: hidden;
+    padding-bottom: 10px;
 `
 const ImgShoes = styled.img`
     width: 100%;
     height: 380px;
+    border-bottom: 1px solid #ccc;
 `
 const CustomText = styled(Text)`
     color:#000000;
@@ -120,9 +119,8 @@ const ContainerTags = styled(Flex) <{ background?: string }>`
     width: 100%;
     height: auto;
     justify-content: start;
-    padding:6px 0px 6px 10px;
     align-items: center;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     ${Text}{
         font-size:16px;
         font-weight:bold;
@@ -130,7 +128,7 @@ const ContainerTags = styled(Flex) <{ background?: string }>`
 `
 
 const Button = styled.button`
-    width: 100%;
+    width: 50%;
     padding: 12px;
     background-color: #8294C4;
     margin-top: 10px;

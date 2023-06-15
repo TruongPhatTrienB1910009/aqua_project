@@ -153,6 +153,27 @@ export const coreMainnet: Chain = {
   }
 }
 
+
+export const optimism: Chain = {
+  id: 10,
+  name: 'optimism Chain',
+  network: 'optimism-mainnet',
+  nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+  rpcUrls: {
+    default: 'https://optimism.blockpi.network/v1/rpc/public',
+  },
+  blockExplorers: {
+    default: {
+      name: 'OptimismExplorer',
+      url: 'https://optimistic.etherscan.io/',
+    },
+  },
+  multicall: {
+    address: '0xf1cD0A82A85292d282aAB45F0516Dc0e12a083Be',
+    blockCreated: 2546469,
+  }
+}
+
 const bscExplorer = { name: 'BscScan', url: 'https://bscscan.com' }
 
 export const bsc: Chain = {

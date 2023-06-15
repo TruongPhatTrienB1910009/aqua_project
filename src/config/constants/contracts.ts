@@ -126,4 +126,12 @@ export default {
     1975: '',
     1116: '0xC24899C146835c6566629652152eae44210A96F6'
   },
+
+  coreAquaDream: {
+    56: '',
+    97: '0x5DabAC878E394C7c6fBE1860F8dAC12A5E2A821e',
+    1945: '',
+    1975: '',
+    1116: '0x313c491C91eEd4037943fcf45eE80018FF7Db77f'
+  }
 }

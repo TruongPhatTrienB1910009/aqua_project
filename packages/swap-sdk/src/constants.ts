@@ -14,7 +14,8 @@ export enum ChainId {
   ETHW_MAINNET = 10001,
   ONUS_TESTNET = 1945,
   ONUS = 1975,
-  CORE = 1116
+  CORE = 1116,
+  OPTIMISM = 10,
 }
 
 export enum TradeType {

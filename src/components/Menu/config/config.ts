@@ -55,7 +55,7 @@ const config: (
       //   ].map((item) => addMenuItemSupported(item, chainId)),
       // },
       {
-        label: t('Lucky Box'),
+        label: t('Mini Game'),
         icon: EarnIcon,
         fillIcon: EarnFillIcon,
         href: '/luckybox',
@@ -64,16 +64,16 @@ const config: (
 
         ].map((item) => addMenuItemSupported(item, chainId)),
       },
-      {
-        label: t('Account'),
-        icon: AccountIcon,
-        fillIcon: AccountFilledIcon,
-        href: '/inventory',
-        showItemsOnMobile: false,
-        items: [
+      // {
+      //   label: t('Account'),
+      //   icon: AccountIcon,
+      //   fillIcon: AccountFilledIcon,
+      //   href: '/inventory',
+      //   showItemsOnMobile: false,
+      //   items: [
 
-        ].map((item) => addMenuItemSupported(item, chainId)),
-      },
+      //   ].map((item) => addMenuItemSupported(item, chainId)),
+      // },
     ].map((item) => addMenuItemSupported(item, chainId))
 
 export default config

@@ -1,23 +1,89 @@
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react'
+import useActiveWeb3React from "hooks/useActiveWeb3React";
+import styled, { css, keyframes } from "styled-components";
 import { Text, Flex, Button } from "@pancakeswap/uikit"
 import CardAquaDream from "./CardAquaDream";
+import { BalanceOf, TotalSupply, TokenOfOwnerByIndex } from '../hook/aquadream/readContract';
+import { useMintNft } from "../hook/aquadream/useMintNft";
+import { GetDataNFT } from '../hook/aquadream/fetchData';
+import { useClaim } from '../hook/aquadream/useClaim';
 
-const AquaDream = () => {
+
+interface Props {
+    filter?: number
+    query?: string
+}
+
+const AquaDream: React.FC<Props> = () => {
+    const { account, chainId } = useActiveWeb3React();
+    const [refresh, setRefresh] = useState(0)
+    function onRefresh(newValue: number) {
+        setRefresh(newValue)
+    }
+
+    const { nftBalance } = BalanceOf(account, chainId);
+    const { totalSupply } = TotalSupply(chainId);
+    const { tokenOfOwnerByIndex } = TokenOfOwnerByIndex(account, chainId);
+    const { handleMint } = useMintNft(chainId, onRefresh);
+    const { handleClaim } = useClaim(chainId);
+    const { dataNFT } = GetDataNFT(tokenOfOwnerByIndex);
+
+
+    const handleMintNFT = () => {
+        handleMint();
+    }
+
+    const handleClaimNFT = () => {
+        handleClaim();
+    }
+
+    useEffect(() => {
+        console.log("nftBalance", nftBalance);
+        console.log("totalSupply", totalSupply);
+        console.log("tokenOfOwnerByIndex", tokenOfOwnerByIndex);
+        if (tokenOfOwnerByIndex >= 0) {
+            console.log("data", dataNFT)
+        }
+    }, [nftBalance, totalSupply, tokenOfOwnerByIndex, dataNFT])
+
     return (
         <CsFlexContainer width="100%" flexDirection="column" mt="3rem" height="auto" minHeight="50vh">
-            <CsFlex>
-                <CardAquaDream
-                    nftImage="https://image.lexica.art/full_jpg/8f066c35-56fe-49da-bb1a-80687491a5d3"
-                    nftPrice={20}
-                    nftName="Octopus"
-                />
-                <MainContent>
-                    <h1>Total: 2500 minted</h1>
-                    <img src="/images/logo.png" alt="" />
-                    <p>Exploring the Deep Sea of BASE NFTs</p>
-                    <AnimationButton>Mint</AnimationButton>
-                </MainContent>
-            </CsFlex>
+            {
+                (nftBalance === 1) ? (
+                    <CsFlex>
+                        <CardAquaDream
+                            nftImage={dataNFT.image}
+                            nftPrice={20}
+                            nftType={dataNFT.nftType}
+                            nftName={dataNFT.name}
+                            ID={tokenOfOwnerByIndex}
+                            onClaimNFT={handleClaimNFT}
+                        />
+                        <MainContent>
+                            <h1>Total: {totalSupply} minted</h1>
+                            <img src="/images/logo.png" alt="" />
+                            <p>Exploring the Deep Sea of BASE NFTs</p>
+
+                            <AnimationButton disabled >Minted</AnimationButton>
+                        </MainContent>
+                    </CsFlex>
+                ) : (
+                    <CsFlex>
+                        <CardAquaDream
+                            nftImage="https://image.lexica.art/full_jpg/8f066c35-56fe-49da-bb1a-80687491a5d3"
+                            nftPrice={20}
+                            nftName="Octopus"
+                        />
+                        <MainContent>
+                            <h1>Total: {totalSupply} minted</h1>
+                            <img src="/images/logo.png" alt="" />
+                            <p>Exploring the Deep Sea of BASE NFTs</p>
+
+                            <AnimationButton onClick={handleMintNFT}>Mint</AnimationButton>
+                        </MainContent>
+                    </CsFlex>
+                )
+            }
         </CsFlexContainer>
     )
 }
@@ -164,5 +230,13 @@ const AnimationButton = styled.button`
     &:hover::after {
         opacity: 1;
         transform: scale(1,1);
+    }
+
+    ${props =>
+        props.disabled &&
+        css`
+            opacity: 0.5;
+            cursor: not-allowed;
+        `
     }
 `

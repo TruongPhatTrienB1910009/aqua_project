@@ -48,6 +48,7 @@ import marketMultiBuyAbi from "../config/abi/multiBuyBox.json"
 import mysteryBoxAbiONUS from "../config/abi/mysteryBoxONUS.json"
 import corePresaleAbi from "../config/abi/corePresaleAbi.json"
 import marketPlaceAbi from "../config/abi/marketPlaceAbi.json"
+import aquadream from "../config/abi/aquadream.json"
 /**
  * Helper hooks to get specific contracts (by ABI)
  */
@@ -231,4 +232,9 @@ export function useCorePresale(presaleAdress?: string, withSignerIfPossible?: bo
 // add 
 export function useCoreMarketPlace(marketPlaceAdress?: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(marketPlaceAdress, marketPlaceAbi, withSignerIfPossible)
+}
+
+// add 
+export function useCoreAquaDream(marketPlaceAdress?: string, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(marketPlaceAdress, aquadream, withSignerIfPossible)
 }

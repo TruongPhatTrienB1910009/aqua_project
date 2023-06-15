@@ -64,9 +64,9 @@ interface WalletModalV2Props<T = unknown> extends ModalV2Props {
   docText: string
 }
 
-export class WalletConnectorNotFoundError extends Error {}
+export class WalletConnectorNotFoundError extends Error { }
 
-export class WalletSwitchChainError extends Error {}
+export class WalletSwitchChainError extends Error { }
 
 const errorAtom = atom<string>('')
 
@@ -93,7 +93,7 @@ const TabContainer = ({ children }: PropsWithChildren) => {
         zIndex="modal"
         width="full"
       >
-        { children }
+        {children}
       </AtomBox>
     </AtomBox>
   )
@@ -127,41 +127,41 @@ function MobileModal<T>({
 
   return (
     <AtomBox width="full">
-        {error ? (
-          <AtomBox
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            style={{ gap: '24px' }}
-            textAlign="center"
-            p="24px"
-          >
-            {selected && typeof selected.icon === 'string' && <Image src={selected.icon} width={108} height={108} />}
-            <div style={{ maxWidth: '246px' }}>
-              <ErrorMessage message={error} />
-            </div>
-          </AtomBox>
-        ) : (
-          <Text color="textSubtle" small p="24px">
-            {t(
-              'Start by connecting with one of the wallets below. Be sure to store your private keys or seed phrase securely. Never share them with anyone.',
-            )}
-          </Text>
-        )}
-        <AtomBox flex={1} py="16px" style={{ maxHeight: '230px' }} overflow="auto">
-          <WalletSelect
-            // displayCount={MOBILE_DEFAULT_DISPLAY_COUNT}
-            wallets={walletsToShow}
-            onClick={(wallet) => {
-              connectWallet(wallet)
-              if (wallet.deepLink && wallet.installed === false) {
-                window.open(wallet.deepLink)
-              }
-            }}
-          />
+      {error ? (
+        <AtomBox
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          style={{ gap: '24px' }}
+          textAlign="center"
+          p="24px"
+        >
+          {selected && typeof selected.icon === 'string' && <Image src={selected.icon} width={108} height={108} />}
+          <div style={{ maxWidth: '246px' }}>
+            <ErrorMessage message={error} />
+          </div>
         </AtomBox>
-        <AtomBox p="24px" borderTop="1"/>
-          {/* <AtomBox>
+      ) : (
+        <Text color="textSubtle" small p="24px">
+          {t(
+            'Start by connecting with one of the wallets below. Be sure to store your private keys or seed phrase securely. Never share them with anyone.',
+          )}
+        </Text>
+      )}
+      <AtomBox flex={1} py="16px" style={{ maxHeight: '230px' }} overflow="auto">
+        <WalletSelect
+          // displayCount={MOBILE_DEFAULT_DISPLAY_COUNT}
+          wallets={walletsToShow}
+          onClick={(wallet) => {
+            connectWallet(wallet)
+            if (wallet.deepLink && wallet.installed === false) {
+              window.open(wallet.deepLink)
+            }
+          }}
+        />
+      </AtomBox>
+      <AtomBox p="24px" borderTop="1" />
+      {/* <AtomBox>
             <Heading as="h1" fontSize="20px" color="secondary">
               {t('Haven’t got a crypto wallet yet?')}
             </Heading>
@@ -170,7 +170,7 @@ function MobileModal<T>({
             </Button>
           </AtomBox>
         </AtomBox> */}
-      </AtomBox>
+    </AtomBox>
   )
 }
 
@@ -226,15 +226,15 @@ function WalletSelect<T, D>({
         )
       })}
       {!showMore && wallets.length > displayCount && (
-            <AtomBox display="flex" justifyContent="center" alignItems="center" flexDirection="column">
-                <Flex width="100%" mt="1rem" pl="5px" style={{gap:"10px", cursor:"pointer"}} alignItems="center" onClick={() => setShowMore(true)}>
-                    <Text textAlign="center" bold color="primaryBright">
-                        {t('More')}
-                    </Text>
-                    <ChevronDownIcon/>
-                </Flex>
-            </AtomBox>
-        )}
+        <AtomBox display="flex" justifyContent="center" alignItems="center" flexDirection="column">
+          <Flex width="100%" mt="1rem" pl="5px" style={{ gap: "10px", cursor: "pointer" }} alignItems="center" onClick={() => setShowMore(true)}>
+            <Text textAlign="center" bold color="primaryBright">
+              {t('More')}
+            </Text>
+            <ChevronDownIcon />
+          </Flex>
+        </AtomBox>
+      )}
     </Wrapper>
   )
 }
@@ -299,7 +299,7 @@ function DesktopModal<T>({
         <AtomBox px="48px">
           <Flex width="100%" justifyContent="center" pb="10px">
             <Heading color="color" as="h4">
-                {t('Connect Wallet')}
+              {t('Connect Wallet')}
             </Heading>
           </Flex>
         </AtomBox>
@@ -394,15 +394,15 @@ export function WalletModalV2<T = unknown>(props: WalletModalV2Props<T>) {
   return (
     <ModalV2 closeOnOverlayClick {...rest}>
       <ModalWrapper onDismiss={props.onDismiss} style={{ overflow: 'visible', border: 'none' }}>
-            <AtomBox position="relative">
-                <TabContainer>
-                    {isMobile ? (
-                      <MobileModal connectWallet={connectWallet} wallets={wallets} docLink={docLink} docText={docText} />
-                    ) : (
-                      <DesktopModal connectWallet={connectWallet} wallets={wallets} docLink={docLink} docText={docText} />
-                    )}
-                </TabContainer>
-            </AtomBox>
+        <AtomBox position="relative">
+          <TabContainer>
+            {isMobile ? (
+              <MobileModal connectWallet={connectWallet} wallets={wallets} docLink={docLink} docText={docText} />
+            ) : (
+              <DesktopModal connectWallet={connectWallet} wallets={wallets} docLink={docLink} docText={docText} />
+            )}
+          </TabContainer>
+        </AtomBox>
       </ModalWrapper>
     </ModalV2>
   )
@@ -478,12 +478,12 @@ const getDesktopLink = (linkDevice: LinkOfDevice) =>
   typeof linkDevice === 'string'
     ? linkDevice
     : typeof linkDevice.desktop === 'string'
-    ? linkDevice.desktop
-    : linkDevice.desktop?.url
+      ? linkDevice.desktop
+      : linkDevice.desktop?.url
 
 const getDesktopText = (linkDevice: LinkOfDevice, fallback: string) =>
   typeof linkDevice === 'string'
     ? fallback
     : typeof linkDevice.desktop === 'string'
-    ? fallback
-    : linkDevice.desktop?.text ?? fallback
+      ? fallback
+      : linkDevice.desktop?.text ?? fallback

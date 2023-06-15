@@ -6,6 +6,7 @@ import SocialLinks from "./Components/SocialLinks";
 export const StyledFooter = styled(Flex)`
   // background: ${({ theme }) => theme.colors.background};
   background: #1b3252;
+  color: #ffffff;
   @media only screen and (max-width: 600px) {
     margin-bottom: 0px !important;
     padding-top: 20px !important;
@@ -88,7 +89,8 @@ export const CustomFlex = styled(Flex)`
 `;
 
 export const CustomLink = styled.a`
-  color: ${({ theme }) => theme.colors.text};
+  // color: ${({ theme }) => theme.colors.text};
+  color: #fff;
   height: 30px;
   display: flex;
   justify-content: flex-start;
@@ -148,7 +150,7 @@ export const ContainerContact = styled(Flex)`
 export const Text = styled.div``;
 
 export const HeadTitle = styled.div`
-  color: #000;
+  color: #fff;
   font-weight: bold;
 `;
 
@@ -166,5 +168,5 @@ export const CsTextEmail = styled(Text)`
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  color: #23262f;
+  color: #fff;
 `;

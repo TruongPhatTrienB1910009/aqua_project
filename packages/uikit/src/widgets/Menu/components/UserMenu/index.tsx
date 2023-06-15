@@ -7,7 +7,7 @@ import { UserMenuProps, variants } from "./types";
 import MenuIcon from "./MenuIcon";
 import { UserMenuItem } from "./styles";
 
-export const StyledUserMenu = styled(Flex)<{isShow?:boolean}>`
+export const StyledUserMenu = styled(Flex) <{ isShow?: boolean }>`
   align-items: center;
   background-color:transparent;
   border-radius: 90px;
@@ -23,10 +23,11 @@ export const StyledUserMenu = styled(Flex)<{isShow?:boolean}>`
   }
 `;
 
-export const LabelText = styled.div<{isShowText?:boolean}>`
-  color: ${({ theme }) => theme.colors.text};
+export const LabelText = styled.div<{ isShowText?: boolean }>`
+  // color: ${({ theme }) => theme.colors.text};
+  color: #fff;
   font-weight: 600;
-  display: ${({ isShowText }) => !isShowText ? "block" : "none" };
+  display: ${({ isShowText }) => !isShowText ? "block" : "none"};
   ${({ theme }) => theme.mediaQueries.sm} {
     display: block;
     margin-left: 8px;
@@ -65,23 +66,23 @@ const UserMenu: React.FC<UserMenuProps> = ({
   children,
   disabled,
   placement = "bottom-end",
-  isShowIcon=!false,
+  isShowIcon = !false,
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [targetRef, setTargetRef] = useState<HTMLDivElement | null>(null);
   const [tooltipRef, setTooltipRef] = useState<HTMLDivElement | null>(null);
   const [accountEllipsis, setAccountEllipsis] = useState<string | null>(null);
-  useEffect(()=>{
-    if(window.screen.width < 321){
+  useEffect(() => {
+    if (window.screen.width < 321) {
       const accountEllipsis = account ? `${account.substring(0, 2)}...${account.substring(account.length - 2)}` : null;
       setAccountEllipsis(accountEllipsis)
     }
-    if(window.screen.width > 322){
+    if (window.screen.width > 322) {
       const accountEllipsis = account ? `${account.substring(0, 4)}...${account.substring(account.length - 4)}` : null;
       setAccountEllipsis(accountEllipsis)
     }
-  },[window.screen.width, account])
+  }, [window.screen.width, account])
   const { styles, attributes } = usePopper(targetRef, tooltipRef, {
     strategy: "fixed",
     placement,
@@ -118,11 +119,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
         }}
         isShow={isShowIcon}
       >
-        { isShowIcon && 
+        {isShowIcon &&
           <MenuIcon avatarSrc={avatarSrc} variant={variant} />
         }
         <LabelText isShowText={isShowIcon} title={typeof text === "string" ? text || account : account}>{text || accountEllipsis}</LabelText>
-        {!disabled && <ChevronDownIcon color="text" width="24px" />}
+        {!disabled && <ChevronDownIcon color="white" width="24px" />}
       </StyledUserMenu>
       {!disabled && (
         <Menu style={styles.popper} ref={setTooltipRef} {...attributes.popper} isOpen={isOpen}>

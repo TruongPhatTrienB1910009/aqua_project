@@ -85,3 +85,29 @@ export const TokenOfOwnerByIndex = (account, chainId: number) => {
     }, [account, chainId])
     return { tokenOfOwnerByIndex }
 }
+
+
+export const IsClaimed = (chainId: number, ID: any) => {
+    const [isClaimed, setIsClaimed] = useState(false);
+    useEffect(() => {
+        const getIsClaimed = async () => {
+            try {
+                const callBoxId = [
+                    {
+                        address: getAddress(contracts.coreAquaDream, chainId),
+                        name: 'isClaimed',
+                        params: [ID]
+                    }
+                ]
+                const idRunBox = await multicall(aquadream, callBoxId, chainId);
+                setIsClaimed(idRunBox);
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
+        getIsClaimed();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ID, chainId])
+    return { isClaimed }
+}

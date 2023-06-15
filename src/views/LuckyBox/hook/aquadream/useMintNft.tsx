@@ -8,15 +8,15 @@ import { useCallback, useEffect, useState } from 'react'
 import { getAddress } from 'utils/addressHelpers'
 
 export const useMintNft = (chainId: number, onRefresh) => {
-    const [requestedBuy, setRequestBuy] = useState(false)
+    const [requestedMint, setRequestMint] = useState(false)
     const { toastSuccess, toastError } = useToast()
     const { callWithMarketGasPrice } = useCallWithMarketGasPrice()
-    const [isCloseBuy, setClose] = useState(false)
+    const [isCloseMint, setClose] = useState(false)
     const { t } = useTranslation()
     const marketplaceContract = useCoreAquaDream(getAddress(contract.coreAquaDream, chainId));
-    const [pendingBuy, setPendingBuy] = useState(false)
+    const [pendingMint, setPendingMint] = useState(false)
     const handleMint = useCallback(async () => {
-        setPendingBuy(true)
+        setPendingMint(true)
         try {
             const tx = await callWithMarketGasPrice(marketplaceContract, 'mintNFT')
             const receipt = await tx.wait()
@@ -26,22 +26,22 @@ export const useMintNft = (chainId: number, onRefresh) => {
                     <ToastDescriptionWithTx txHash={receipt.transactionHash} />
                 )
                 setClose(true)
-                setRequestBuy(true)
+                setRequestMint(true)
                 onRefresh(Date.now())
             } else {
                 // user rejected tx or didn't go thru
                 toastError(t('Error'), t('Please try again. Confirm the transaction and make sure you are paying enough gas!'))
-                setRequestBuy(false)
+                setRequestMint(false)
             }
         } catch (e) {
             console.error(e)
             toastError(t('Error'), t('Please try again. Confirm the transaction and make sure you are paying enough gas!'))
         } finally {
-            setPendingBuy(false)
+            setPendingMint(false)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [callWithMarketGasPrice, marketplaceContract, toastSuccess, t, toastError])
 
 
-    return { handleMint, requestedBuy, pendingBuy, isCloseBuy }
+    return { handleMint, requestedMint, pendingMint, isCloseMint }
 }

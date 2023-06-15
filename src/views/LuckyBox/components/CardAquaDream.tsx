@@ -26,6 +26,7 @@ interface PropsCard {
     nftType?: string
     onClaimNFT?: any
     balanceOfToken?: number
+    isClaimed?: any
 }
 
 const CardAquaDream: React.FC<PropsCard> = ({
@@ -36,7 +37,7 @@ const CardAquaDream: React.FC<PropsCard> = ({
     nftPrice,
     nftDesc,
     onClaimNFT,
-    balanceOfToken
+    balanceOfToken,
 }) => {
     return (
         <>
@@ -60,7 +61,7 @@ export default CardAquaDream;
 
 const Container = styled.div<{ isHaving?: boolean, background?: string }>`
     width: 360px;
-    min-height: 460px;
+    min-height: 420px;
     overflow: hidden;
     border-radius: 10px;
     margin-bottom: 1rem;
@@ -84,23 +85,22 @@ const CustomCard = styled.div<{ background?: string }>`
     position: relative;
     justify-content: center;
     align-items: center;
-    border: 3px solid #ccc;
     overflow: hidden;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 `
 const ImgShoes = styled.img`
     width: 100%;
     height: 380px;
-    border-bottom: 1px solid #ccc;
+    // border-bottom: 1px solid #ccc;
 `
 const CustomText = styled(Text)`
-    color:#000000;
+    color:#fff;
     display: flex;
     align-item: center;
     justify-content: center;
     font-size: 18px;
     font-weight: 600;
-    margin-top: 10px
+    margin-top: 20px;
 `
 const ContainerRow = styled.div`
     align-items: center;

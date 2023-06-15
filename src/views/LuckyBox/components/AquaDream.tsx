@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import useActiveWeb3React from "hooks/useActiveWeb3React";
 import styled, { css, keyframes } from "styled-components";
-import { Text, Flex, Button } from "@pancakeswap/uikit"
+import { Text, Flex, Button } from "@pancakeswap/uikit";
+import { Loading } from 'views/Inventory/components/ListShoes';
 import CardAquaDream from "./CardAquaDream";
-import { BalanceOf, TotalSupply, TokenOfOwnerByIndex } from '../hook/aquadream/readContract';
+import { BalanceOf, TotalSupply, TokenOfOwnerByIndex, IsClaimed } from '../hook/aquadream/readContract';
 import { useMintNft } from "../hook/aquadream/useMintNft";
 import { GetDataNFT } from '../hook/aquadream/fetchData';
 import { useClaim } from '../hook/aquadream/useClaim';
@@ -24,9 +25,10 @@ const AquaDream: React.FC<Props> = () => {
     const { nftBalance } = BalanceOf(account, chainId);
     const { totalSupply } = TotalSupply(chainId);
     const { tokenOfOwnerByIndex } = TokenOfOwnerByIndex(account, chainId);
-    const { handleMint } = useMintNft(chainId, onRefresh);
+    const { handleMint, pendingMint } = useMintNft(chainId, onRefresh);
     const { handleClaim } = useClaim(chainId);
     const { dataNFT } = GetDataNFT(tokenOfOwnerByIndex);
+    const { isClaimed } = IsClaimed(chainId, tokenOfOwnerByIndex);
 
 
     const handleMintNFT = () => {
@@ -41,13 +43,14 @@ const AquaDream: React.FC<Props> = () => {
         console.log("nftBalance", nftBalance);
         console.log("totalSupply", totalSupply);
         console.log("tokenOfOwnerByIndex", tokenOfOwnerByIndex);
+        console.log("isClaimed", isClaimed);
         if (tokenOfOwnerByIndex >= 0) {
             console.log("data", dataNFT)
         }
-    }, [nftBalance, totalSupply, tokenOfOwnerByIndex, dataNFT])
+    }, [nftBalance, totalSupply, tokenOfOwnerByIndex, dataNFT, isClaimed, account])
 
     return (
-        <CsFlexContainer width="100%" flexDirection="column" mt="3rem" height="auto" minHeight="50vh">
+        <CsFlexContainer width="100%" flexDirection="column" mt="6rem" height="auto" minHeight="50vh">
             {
                 (nftBalance === 1) ? (
                     <CsFlex>
@@ -58,10 +61,11 @@ const AquaDream: React.FC<Props> = () => {
                             nftName={dataNFT.name}
                             ID={tokenOfOwnerByIndex}
                             onClaimNFT={handleClaimNFT}
+                            isClaimed={isClaimed}
                         />
                         <MainContent>
                             <h1>Total: {totalSupply} minted</h1>
-                            <img src="/images/logo.png" alt="" />
+                            <img src="/images/help.png" alt="" />
                             <p>Exploring the Deep Sea of BASE NFTs</p>
 
                             <AnimationButton disabled >Minted</AnimationButton>
@@ -70,16 +74,18 @@ const AquaDream: React.FC<Props> = () => {
                 ) : (
                     <CsFlex>
                         <CardAquaDream
-                            nftImage="https://image.lexica.art/full_jpg/8f066c35-56fe-49da-bb1a-80687491a5d3"
-                            nftPrice={20}
-                            nftName="Octopus"
+                            nftImage="/images/cardSecret.jpg"
+                            nftName="Card AquaDream"
+                            nftType=''
                         />
                         <MainContent>
                             <h1>Total: {totalSupply} minted</h1>
-                            <img src="/images/logo.png" alt="" />
+                            <img src="/images/myimages/logo.png" alt="" />
                             <p>Exploring the Deep Sea of BASE NFTs</p>
 
-                            <AnimationButton onClick={handleMintNFT}>Mint</AnimationButton>
+                            {
+                                (pendingMint) ? (<Loading />) : (<AnimationButton onClick={handleMintNFT}>Mint NFT</AnimationButton>)
+                            }
                         </MainContent>
                     </CsFlex>
                 )
@@ -167,7 +173,7 @@ const MainContent = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 600px;
-    height: 320px;
+    height: 380px;
     background: transparent;
     border: 2px solid #ccc;
     border-radius: 10px;
@@ -175,11 +181,12 @@ const MainContent = styled.div`
     color: #000000;
     h1{
         font-size: 24px;
+        color: #fff;
     }
 
     img {
         max-width: 180px;
-        height: 180px
+        height: 200px;
     }
 
     p {

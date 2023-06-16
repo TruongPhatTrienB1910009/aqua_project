@@ -25,7 +25,9 @@ module.exports = {
     "prettier",
     "prettier/react",
     "prettier/@typescript-eslint",
-    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   rules: {
     "import/prefer-default-export": 0,
@@ -33,8 +35,8 @@ module.exports = {
     "react/jsx-no-bind": 0,
     "react/no-unused-prop-types": 0,
     // Typescript
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', { 'varsIgnorePattern': '^_', "argsIgnorePattern": "^_" }],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["warn"],
     "no-shadow": "off",

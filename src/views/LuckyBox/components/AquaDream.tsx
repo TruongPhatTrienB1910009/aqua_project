@@ -36,7 +36,7 @@ const AquaDream: React.FC<Props> = () => {
   const handleClaimNFT = () => {
     handleClaim()
   }
-
+  // hello
   useEffect(() => {
     console.log('nftBalance', nftBalance)
     console.log('totalSupply', totalSupply)

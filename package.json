@@ -8,11 +8,11 @@
     "apis/*"
   ],
   "scripts": {
-    "analyze": "ANALYZE=true yarn build",
+    "analyze": "ANALYZE=true npm build",
     "dev": "next dev",
-    "build": "yarn run typechain && next build",
+    "build": "npm run typechain && next build",
     "start": "next start",
-    "test": "jest && yarn turbo run test",
+    "test": "jest && npm turbo run test",
     "test:watch": "jest --watch",
     "test:config": "jest src/config/__tests__/ --testPathIgnorePatterns",
     "integration-test": "start-server-and-test start http://localhost:3000 'turbo run integration-test --filter=test'",
@@ -21,9 +21,9 @@
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json}\"",
     "format:check:staged": "lint-staged",
     "format:write": "prettier --write \"**/*.{js,jsx,ts,tsx,json}\"",
-    "updateLPsAPR": "yarn turbo run build --filter=@pancakeswap/sdk && NODE_PATH=./src ts-node --compiler-options '{\"module\":\"commonjs\"}' scripts/updateLPsAPR.ts",
+    "updateLPsAPR": "npm turbo run build --filter=@pancakeswap/sdk && NODE_PATH=./src ts-node --compiler-options '{\"module\":\"commonjs\"}' scripts/updateLPsAPR.ts",
     "prepare": "husky install",
-    "postinstall": "patch-package && yarn run typechain",
+    "postinstall": "patch-package && npm run typechain",
     "typechain": "typechain --out-dir src/config/abi/types --target=ethers-v5 \"src/config/abi/*.json\""
   },
   "browserslist": {

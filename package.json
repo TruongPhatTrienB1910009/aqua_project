@@ -127,6 +127,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "turbo": "^1.4.5",
     "@next/eslint-plugin-next": "^12.0.10",
     "@stylelint/postcss-css-in-js": "^0.37.2",
     "@testing-library/jest-dom": "^5.16.2",
@@ -168,7 +169,6 @@
     "stylelint-config-styled-components": "^0.1.1",
     "ts-node": "^10.9.1",
     "tsconfig": "*",
-    "turbo": "^1.4.5",
     "typechain": "^6.1.0",
     "vitest": "^0.23.1"
   }

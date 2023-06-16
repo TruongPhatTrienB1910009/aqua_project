@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { Text, Flex, Button } from "@pancakeswap/uikit"
 import useActiveWeb3React from "hooks/useActiveWeb3React";
+import { useTranslation } from "@pancakeswap/localization";
 import { GetNftBalance, FetchTokenOfOwnerByIndex, FetDataNft } from "../hook/fetchDataMysteryBox"
 import CardShoes from "./CardShoes";
-import { useTranslation } from "@pancakeswap/localization";
 
 
 // Loading

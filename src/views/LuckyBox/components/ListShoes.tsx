@@ -51,7 +51,7 @@ const ListShoes: React.FC<Props> = () => {
             setBalance(-1);
         }
     }, [balance])
-    x
+
     useEffect(() => {
 
         handleApprove();

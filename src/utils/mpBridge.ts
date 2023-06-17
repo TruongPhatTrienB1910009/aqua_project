@@ -101,7 +101,7 @@ export const useSystemInfo = () => {
   return info
 }
 
-const mpWebviewPath = new Set(['/farms/', '/pools/'])
+const mpWebviewPath = new Set(['/farms/history', '/pools/history'])
 const handleLinkClick = (e: MouseEvent, router: NextRouter) => {
   // @ts-ignore
   const href = e.target?.closest('a')?.href || ''

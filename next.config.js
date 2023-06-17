@@ -19,6 +19,7 @@ const sentryWebpackPluginOptions =
       //   urlPrefix, include, ignore
       silent: false, // Logging when deploying to check if there is any problem
       validate: true,
+      dryRun: !process.env.SENTRY_AUTH_TOKEN,
       authToken: process.env.SENTRY_AUTH_TOKEN
       // For all available options, see:
       // https://github.com/getsentry/sentry-webpack-plugin#options.

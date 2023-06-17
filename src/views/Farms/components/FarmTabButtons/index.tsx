@@ -17,7 +17,7 @@ const FarmTabButtons: React.FC<React.PropsWithChildren<FarmTabButtonsProps>> = (
       router.push('/farms')
     }
     if (option.value) {
-      router.push('/farms/')
+      router.push('/farms/history')
     }
   }
 
@@ -26,10 +26,10 @@ const FarmTabButtons: React.FC<React.PropsWithChildren<FarmTabButtonsProps>> = (
     case '/farms':
       activeIndex = 0
       break
-    case '/farms/':
+    case '/farms/history':
       activeIndex = 1
       break
-    case '/_mp/farms/':
+    case '/_mp/farms/history':
       activeIndex = 1
       break
     case '/farms/archived':

@@ -4,6 +4,7 @@ import styled, { css, keyframes } from 'styled-components'
 import { Text, Flex, Button } from '@pancakeswap/uikit'
 import { Loading } from 'views/Inventory/components/ListShoes'
 import CardAquaDream from './CardAquaDream'
+
 import { BalanceOf, TotalSupply, TokenOfOwnerByIndex, IsClaimed } from '../hook/aquadream/readContract'
 import { useMintNft } from '../hook/aquadream/useMintNft'
 import { GetDataNFT } from '../hook/aquadream/fetchData'
@@ -41,7 +42,8 @@ const AquaDream: React.FC<Props> = () => {
     console.log('nftBalance', nftBalance)
     console.log('totalSupply', totalSupply)
     console.log('tokenOfOwnerByIndex', tokenOfOwnerByIndex)
-    // console.log('isClaimed', isClaimed[0][0])
+    console.log('isClaimed', isClaimed)
+    console.log('account', account)
     if (tokenOfOwnerByIndex >= 0) {
       console.log('data', dataNFT)
     }
@@ -49,34 +51,48 @@ const AquaDream: React.FC<Props> = () => {
 
   return (
     <CsFlexContainer width="100%" flexDirection="column" mt="6rem" height="auto" minHeight="50vh">
-      {nftBalance === 1 ? (
+      {account != null ? (
         <CsFlex>
           <CardAquaDream
             nftImage={dataNFT.image}
             nftPrice={20}
             nftType={dataNFT.nftType}
             nftName={dataNFT.name}
+            nftBalance={nftBalance}
             ID={tokenOfOwnerByIndex}
             onClaimNFT={handleClaimNFT}
             isClaimed={isClaimed}
+            acc={account}
           />
-          <MainContent>
-            <h1>Total: {totalSupply} minted</h1>
-            <img src="/images/help.png" alt="" />
-            <p>Exploring the Deep Sea of BASE NFTs</p>
-
-            <AnimationButton disabled>Minted</AnimationButton>
-          </MainContent>
+          {nftBalance === 0 ? (
+            <MainContent>
+              <h1>Total: {totalSupply} minted</h1>
+              <img src="/images/help.png" alt="" />
+              <p>Exploring the Deep Sea of BASE NFTs</p>
+              {pendingMint ? <Loading /> : <AnimationButton onClick={handleMintNFT}>Mint NFT</AnimationButton>}
+            </MainContent>
+          ) : (
+            <MainContent>
+              <h1>Total: {totalSupply} minted</h1>
+              <img src="/images/help.png" alt="" />
+              <p>Exploring the Deep Sea of BASE NFTs</p>
+              <AnimationButton disabled>Minted</AnimationButton>
+            </MainContent>
+          )}
         </CsFlex>
       ) : (
         <CsFlex>
-          <CardAquaDream nftImage="/images/cardSecret.jpg" nftName="Card AquaDream" nftType="" />
+          <CardAquaDream
+            nftImage="/images/cardSecret.jpg"
+            nftName="Card AquaDream"
+            // nftBalance={nftBalance}
+            acc={account}
+          />
           <MainContent>
             <h1>Total: {totalSupply} minted</h1>
             <img src="/images/myimages/logo.png" alt="" />
             <p>Exploring the Deep Sea of BASE NFTs</p>
-
-            {pendingMint ? <Loading /> : <AnimationButton onClick={handleMintNFT}>Mint NFT</AnimationButton>}
+            <AnimationButton disabled>Connect wallet to mint</AnimationButton>
           </MainContent>
         </CsFlex>
       )}
@@ -162,13 +178,14 @@ const MainContent = styled.div`
   width: 600px;
   height: 380px;
   background: transparent;
-  border: 2px solid #ccc;
+  //   border: 7px solid #ccc;
+  box-shadow: 0 0 9px rgba(0, 0, 0, 3.3);
   border-radius: 10px;
   padding: 20px;
   color: #000000;
   h1 {
     font-size: 24px;
-    color: #fff;
+    color: #000000;
   }
 
   img {
@@ -177,7 +194,16 @@ const MainContent = styled.div`
   }
 
   p {
-    margin-bottom: 20px;
+    width: 644px;
+    height: 140px;
+    left: 625px;
+    top: 442px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 70px;
   }
 `
 

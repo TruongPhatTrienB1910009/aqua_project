@@ -8,13 +8,13 @@ import Container from './Container'
 const StyledPage = styled(Container)`
   min-height: calc(100vh - 64px);
   padding-bottom: 16px;
-  padding-left:0px;
-  padding-right:0px;
+  padding-left: 0px;
+  padding-right: 0px;
   @media screen and (max-width: 600px) {
-      padding-left:10px;
-      padding-right:10px;
-      width: 100%;
-      overflow-x:hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    overflow-x: hidden;
   }
 `
 
@@ -46,11 +46,11 @@ interface PageProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const mystyle = {
-  backgroundImage: `url("https://img.freepik.com/free-photo/underwater-adventure-blue-sea-life-reef-fish-generative-ai_188544-12760.jpg?w=1060&t=st=1685941191~exp=1685941791~hmac=2650cc56ecce50a01b9937906de2ac66114416012248699abdb3e51fdf11eca1")`,
+  backgroundImage: `url("https://i.ibb.co/YdhFss0/background.png")`,
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-};
+}
 
 const Page: React.FC<React.PropsWithChildren<PageProps>> = ({ children, symbol, ...props }) => {
   return (

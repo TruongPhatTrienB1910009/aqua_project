@@ -26,6 +26,8 @@ interface PropsCard {
   onClaimNFT?: any
   balanceOfToken?: number
   isClaimed?: any
+  nftBalance?: any
+  acc?: any
 }
 
 const CardAquaDream: React.FC<PropsCard> = ({
@@ -38,20 +40,30 @@ const CardAquaDream: React.FC<PropsCard> = ({
   onClaimNFT,
   balanceOfToken,
   isClaimed,
+  nftBalance,
+  acc,
 }) => {
-  console.log('isclamied', isClaimed, Number(nftType))
+  console.log('isclamied', isClaimed, Number(nftType), nftBalance, acc)
   return (
     <>
       <Container>
-        <CustomCard>
-          <ImgShoes src={nftImage} alt="Image Box" />
-          <CustomText>{nftName}</CustomText>
-          {Number(nftType) !== 0 && isClaimed[0][0] === false ? (
-            <Button onClick={onClaimNFT}>Claim {nftPrice}</Button>
-          ) : (
-            <AnimationButton disabled>Claimed</AnimationButton>
-          )}
-        </CustomCard>
+        {nftBalance === 1 && acc != null && Number(nftType) !== 0 ? (
+          <CustomCard>
+            <ImgShoes src={nftImage} alt="Image Box" />
+            <CustomText>{nftName}</CustomText>
+            {isClaimed === false ? (
+              <Button onClick={onClaimNFT}>Claim {nftPrice} USDT</Button>
+            ) : (
+              <AnimationButton disabled>Claimed</AnimationButton>
+            )}
+          </CustomCard>
+        ) : (
+          <CustomCard>
+            <ImgShoes src="/images/cardSecret.jpg" alt="Image Box" />
+            <CustomText>Card AquaDream</CustomText>
+            {/* <AnimationButton disabled>Claimed</AnimationButton> */}
+          </CustomCard>
+        )}
       </Container>
     </>
   )
@@ -63,6 +75,8 @@ const Container = styled.div<{ isHaving?: boolean; background?: string }>`
   width: 360px;
   min-height: 420px;
   overflow: hidden;
+  //   border: 7px solid #ccc;
+  box-shadow: 0 0 9px rgba(0, 0, 0, 3.3);
   border-radius: 10px;
   margin-bottom: 1rem;
   display: flex;
@@ -129,7 +143,7 @@ const ContainerTags = styled(Flex)<{ background?: string }>`
 const Button = styled.button`
   width: 50%;
   padding: 12px;
-  background-color: #8294c4;
+  background-color: #95e9ed;
   margin-top: 10px;
   cursor: pointer;
   border-radius: 20px;
@@ -141,6 +155,7 @@ const Button = styled.button`
   border: 1px solid #ffead2;
   font-weight: 600;
   font-family: sans-serif;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 `
 
 const AnimationButton = styled.button`

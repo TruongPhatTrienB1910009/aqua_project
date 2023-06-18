@@ -28,7 +28,9 @@ export const BalanceOf = (account: string, chainId: number) => {
       }
     }
 
-    getBalanceOf()
+    if (account) {
+      getBalanceOf()
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, chainId])
@@ -80,7 +82,9 @@ export const TokenOfOwnerByIndex = (account, chainId: number) => {
       }
     }
 
-    gettokenOfOwnerByIndex()
+    if (account) {
+      gettokenOfOwnerByIndex()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, chainId])
   return { tokenOfOwnerByIndex }

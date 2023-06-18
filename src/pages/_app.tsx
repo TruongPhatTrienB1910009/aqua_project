@@ -55,6 +55,7 @@ function MPGlobalHooks() {
   return null
 }
 
+
 function MyApp(props: AppProps<{ initialReduxState: any }>) {
   const { pageProps, Component } = props
   const store = useStore(pageProps.initialReduxState)
@@ -62,55 +63,57 @@ function MyApp(props: AppProps<{ initialReduxState: any }>) {
   // console.log("pageProps Component", props)
   return (
     <>
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1, viewport-fit=cover"
-        />
-        <meta
-          name="description"
-          content="CoreDoge is a Reward and GameFi Platform Token that leverages the popularity of CoreDAO to create an immersive gaming experience. The platform integrates blockchain technology, decentralized finance (DeFi), and non-fungible tokens (NFTs) to enable users to participate in gaming and earn rewards thro..."
-        />
-        <meta name="theme-color" content="#1FC7D4" />
-        <meta name="twitter:image" content="https://coredoge.xyz/opengraph.jpg" />
-        <meta
-          name="twitter:description"
-          content="CoreDoge is a Reward and GameFi Platform Token that leverages the popularity of CoreDAO to create an immersive gaming experience. The platform integrates blockchain technology, decentralized finance (DeFi), and non-fungible tokens (NFTs) to enable users to participate in gaming and earn rewards thro..."
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="CoreDoge is a Reward and GameFi Platform Token that leverages the popularity of CoreDAO to create an immersive gaming experience. The platform integrates blockchain technology, decentralized finance (DeFi), and non-fungible tokens (NFTs) to enable users to participate in gaming and earn rewards thro..." />
+      <div>
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1, viewport-fit=cover"
+          />
+          <meta
+            name="description"
+            content="CoreDoge is a Reward and GameFi Platform Token that leverages the popularity of CoreDAO to create an immersive gaming experience. The platform integrates blockchain technology, decentralized finance (DeFi), and non-fungible tokens (NFTs) to enable users to participate in gaming and earn rewards thro..."
+          />
+          <meta name="theme-color" content="#1FC7D4" />
+          <meta name="twitter:image" content="https://coredoge.xyz/opengraph.jpg" />
+          <meta
+            name="twitter:description"
+            content="CoreDoge is a Reward and GameFi Platform Token that leverages the popularity of CoreDAO to create an immersive gaming experience. The platform integrates blockchain technology, decentralized finance (DeFi), and non-fungible tokens (NFTs) to enable users to participate in gaming and earn rewards thro..."
+          />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="CoreDoge is a Reward and GameFi Platform Token that leverages the popularity of CoreDAO to create an immersive gaming experience. The platform integrates blockchain technology, decentralized finance (DeFi), and non-fungible tokens (NFTs) to enable users to participate in gaming and earn rewards thro..." />
 
-        <title>CoreDoge</title>
-        {(Component as NextPageWithLayout).mp && (
-          // eslint-disable-next-line @next/next/no-sync-scripts
-          <script src="https://public.bnbstatic.com/static/js/mp-webview-sdk/webview-v1.0.0.min.js" id="mp-webview" />
-        )}
+          <title>CoreDoge</title>
+          {(Component as NextPageWithLayout).mp && (
+            // eslint-disable-next-line @next/next/no-sync-scripts
+            <script src="https://public.bnbstatic.com/static/js/mp-webview-sdk/webview-v1.0.0.min.js" id="mp-webview" />
+          )}
 
-      </Head>
-      <Providers store={store}>
-        <Blocklist>
-          {(Component as NextPageWithLayout).mp ? <MPGlobalHooks /> : <GlobalHooks />}
-          <ResetCSS />
-          <GlobalStyle />
-          <PersistGate loading={null} persistor={persistor}>
-            <Updaters />
-            <App {...props} />
-          </PersistGate>
-        </Blocklist>
-      </Providers>
-      <Script
-        strategy="afterInteractive"
-        id="google-tag"
-        dangerouslySetInnerHTML={{
-          __html: `
+        </Head>
+        <Providers store={store}>
+          <Blocklist>
+            {(Component as NextPageWithLayout).mp ? <MPGlobalHooks /> : <GlobalHooks />}
+            <ResetCSS />
+            <GlobalStyle />
+            <PersistGate loading={null} persistor={persistor}>
+              <Updaters />
+              <App {...props} />
+            </PersistGate>
+          </Blocklist>
+        </Providers>
+        <Script
+          strategy="afterInteractive"
+          id="google-tag"
+          dangerouslySetInnerHTML={{
+            __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer', '${process.env.NEXT_PUBLIC_GTAG}');
           `,
-        }}
-      />
+          }}
+        />
+      </div>
     </>
   )
 }

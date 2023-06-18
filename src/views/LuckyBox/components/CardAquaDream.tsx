@@ -76,8 +76,9 @@ const Container = styled.div<{ isHaving?: boolean; background?: string }>`
   min-height: 420px;
   overflow: hidden;
   //   border: 7px solid #ccc;
+  align-items: center;
   box-shadow: 0 0 9px rgba(0, 0, 0, 3.3);
-  border-radius: 10px;
+  border-radius: 50px;
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
@@ -85,7 +86,7 @@ const Container = styled.div<{ isHaving?: boolean; background?: string }>`
   @media screen and (max-width: 600px) {
   }
 
-  background-color: #3f7a8a;
+  background: linear-gradient(180deg, #000b0e -18.24%, rgba(26, 112, 138, 0) 153.53%);
   background-image: ${(props) => props.background};
 `
 
@@ -142,62 +143,96 @@ const ContainerTags = styled(Flex)<{ background?: string }>`
 
 const Button = styled.button`
   width: 50%;
+  position: relative;
   padding: 12px;
-  background-color: #95e9ed;
+  background: linear-gradient(
+    191.32deg,
+    #00121d -118.59%,
+    #3da1a6 15.64%,
+    #dacee1 56.18%,
+    #5d6aaa 81.36%,
+    #0d2986 109.76%,
+    #481cbb 131.68%,
+    #142d8e 131.68%
+  );
+  border-radius: 20.5692px;
   margin-top: 10px;
   cursor: pointer;
-  border-radius: 20px;
   &:hover {
     background-color: #ffead2;
     color: #8294c4;
   }
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
   font-size: 20px;
-  border: 1px solid #ffead2;
-  font-weight: 600;
-  font-family: sans-serif;
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  line-height: 42px;
+  /* or 104% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: capitalize;
+
+  color: #ffffff;
+
+  border: 1px solid #000000;
 `
 
 const AnimationButton = styled.button`
   width: 200px;
   padding: 15px 5px;
-  margin-top: 10px;
+  margin-top: 0px;
   cursor: pointer;
   color: #fff;
   transition: all 0.5s;
   position: relative;
   background-color: transparent;
   border: none;
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: rgba(255, 255, 255, 0.6);
-    transition: all 0.3s;
-  }
+  //   &::before {
+  //     content: '';
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     width: 100%;
+  //     height: 100%;
+  //     z-index: 1;
+  //     background-color: rgba(255, 255, 255, 0.6);
+  //     transition: all 0.3s;
+  //   }
 
   &:hover::before {
     opacity: 0;
     transform: scale(0.5, 0.5);
   }
+  box-shadow: 0px 9px 9px rgba(0, 0, 0, 5.25);
+  border-radius: 15px;
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0;
-    transition: all 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    transform: scale(1.2, 1.2);
-  }
+  //   &::after {
+  //     content: '';
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     width: 100%;
+  //     height: 100%;
+  //     z-index: 1;
+  //     opacity: 0;
+  //     transition: all 0.3s;
+  //     border: 1px solid rgba(255, 255, 255, 0.5);
+  //     transform: scale(1.2, 1.2);
+  //   }
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 42px;
+  /* or 104% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: capitalize;
 
   &:hover::after {
     opacity: 1;
@@ -209,5 +244,8 @@ const AnimationButton = styled.button`
     css`
       opacity: 0.5;
       cursor: not-allowed;
+      border-radius: 20.5692px;
+      background: linear-gradient(101.61deg, #ffd9b7 -14.72%, #ff6543 66.97%);
+      width: 100px;
     `}
 `

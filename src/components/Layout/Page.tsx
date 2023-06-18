@@ -43,19 +43,29 @@ export const PageMeta: React.FC<React.PropsWithChildren<{ symbol?: string }>> = 
 
 interface PageProps extends React.HTMLAttributes<HTMLDivElement> {
   symbol?: string
+  url?: string
 }
 
-const mystyle = {
-  backgroundImage: `url("https://i.ibb.co/YdhFss0/background.png")`,
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
+const mycss = `.bg {
+  position: relative;
+  background-image: url('https://i.ibb.co/YdhFss0/background.png');
+  background-size: cover;
 }
+.bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Change the color and opacity as needed */
+}`
 
 const Page: React.FC<React.PropsWithChildren<PageProps>> = ({ children, symbol, ...props }) => {
   return (
     <>
-      <div style={mystyle}>
+      <style>{mycss}</style>
+      <div className="bg">
         <PageMeta symbol={symbol} />
         <StyledPage {...props}>{children}</StyledPage>
       </div>

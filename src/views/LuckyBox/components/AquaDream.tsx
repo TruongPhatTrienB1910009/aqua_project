@@ -82,7 +82,7 @@ const AquaDream: React.FC<Props> = () => {
           />
           <MainContent>
             <h1>Total: {totalSupply} minted</h1>
-            <img src="/images/myimages/logo.png" alt="" />
+            {/* <img src="/images/myimages/logo.png" alt="" /> */}
             <p>Exploring the Deep Sea of BASE NFTs</p>
             <AnimationButton disabled>Connect wallet to mint</AnimationButton>
           </MainContent>
@@ -168,16 +168,20 @@ const MainContent = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 600px;
-  height: 380px;
+  height: 300px;
   background: transparent;
   //   border: 7px solid #ccc;
-  box-shadow: 0 0 9px rgba(0, 0, 0, 3.3);
-  border-radius: 10px;
+  //   box-shadow: 0 0 9px rgba(0, 0, 0, 3.3);
+  //   border-radius: 10px;
   padding: 20px;
+  right: 50px;
+  bottom: 0px;
+  position: relative;
   color: #000000;
   h1 {
     font-size: 24px;
-    color: #000000;
+    color: #ffffff;
+    position: relative;
   }
 
   img {
@@ -195,35 +199,63 @@ const MainContent = styled.div`
     font-style: normal;
     font-weight: 600;
     font-size: 60px;
+    color: #ffffff;
     line-height: 70px;
   }
 `
 
 const AnimationButton = styled.button`
-  width: 100%;
+  width: 120px;
   padding: 15px 5px;
   cursor: pointer;
   color: #fff;
   transition: all 0.5s;
+  right: 260px;
+  bottom: 10px;
   position: relative;
-  background-color: transparent;
-  border: none;
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: rgba(255, 255, 255, 0.6);
-    transition: all 0.3s;
-  }
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 42px;
+  /* or 104% */
 
-  &:hover::before {
-    opacity: 0;
-    transform: scale(0.5, 0.5);
-  }
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: capitalize;
+  box-shadow: 0px 9px 9px rgba(0, 0, 0, 5.25);
+  border-radius: 15px;
+
+  color: #ffffff;
+  background: linear-gradient(
+    191.32deg,
+    #00121d -118.59%,
+    #3da1a6 15.64%,
+    #dacee1 56.18%,
+    #5d6aaa 81.36%,
+    #0d2986 109.76%,
+    #481cbb 131.68%,
+    #142d8e 131.68%
+  );
+  border-radius: 21.5692px;
+  border: none;
+  //   &::before {
+  //     content: '';
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     width: 100%;
+  //     height: 100%;
+  //     z-index: 1;
+  //     background-color: rgba(255, 255, 255, 0.6);
+  //     transition: all 0.3s;
+  //   }
+
+  //   &:hover::before {
+  //     opacity: 0;
+  //     transform: scale(0.5, 0.5);
+  //   }
 
   &::after {
     content: '';
@@ -239,15 +271,18 @@ const AnimationButton = styled.button`
     transform: scale(1.2, 1.2);
   }
 
-  &:hover::after {
-    opacity: 1;
-    transform: scale(1, 1);
-  }
+  //   &:hover::after {
+  //     opacity: 1;
+  //     transform: scale(1, 1);
+  //   }
 
   ${(props) =>
     props.disabled &&
     css`
-      opacity: 0.5;
+      opacity: 0.6;
       cursor: not-allowed;
+      background: linear-gradient(101.61deg, #ffd9b7 -14.72%, #ff6543 66.97%);
+      width: 100px;
+      right: 270px;
     `}
 `

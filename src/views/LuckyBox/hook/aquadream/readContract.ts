@@ -100,7 +100,6 @@ export const IsClaimed = (chainId: number, ID: any) => {
         ]
         const idRunBox = await multicall(aquadream, callBoxId, chainId)
         setIsClaimed(idRunBox[0][0])
-        console.log('idrunbox', idRunBox)
       } catch (e) {
         console.log(e)
       }

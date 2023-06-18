@@ -66,7 +66,7 @@ const AquaDream: React.FC<Props> = () => {
           />
           <MainContent>
             <h1>Total: {totalSupply} minted</h1>
-            <img src="/images/help.png" alt="" />
+            <img src="/images/myimages/logo.png" alt="" />
             <p>Exploring the Deep Sea of BASE NFTs</p>
 
             <AnimationButton disabled>Minted</AnimationButton>

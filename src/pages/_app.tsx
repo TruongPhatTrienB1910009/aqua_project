@@ -60,7 +60,6 @@ function MyApp(props: AppProps<{ initialReduxState: any }>) {
   const { pageProps, Component } = props
   const store = useStore(pageProps.initialReduxState)
   useCheckTokenExpired()
-  // console.log("pageProps Component", props)
   return (
     <>
       <div>

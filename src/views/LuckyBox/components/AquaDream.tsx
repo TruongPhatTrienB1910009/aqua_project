@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useEffect, useState } from 'react'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import styled, { css, keyframes } from 'styled-components'
@@ -9,6 +10,7 @@ import { BalanceOf, TotalSupply, TokenOfOwnerByIndex, IsClaimed } from '../hook/
 import { useMintNft } from '../hook/aquadream/useMintNft'
 import { GetDataNFT } from '../hook/aquadream/fetchData'
 import { useClaim } from '../hook/aquadream/useClaim'
+import CountdownTimer from "./timer/CountdownTimer";
 
 interface Props {
   filter?: number
@@ -30,8 +32,15 @@ const AquaDream: React.FC<Props> = () => {
   const { dataNFT } = GetDataNFT(tokenOfOwnerByIndex)
   const { isClaimed } = IsClaimed(chainId, tokenOfOwnerByIndex)
 
+  const startDate = new Date('June 19, 2023 14:43:00');
+  const dateTimeAfterThreeDays = startDate;
+
   const handleMintNFT = () => {
-    handleMint()
+    if (new Date('June 19, 2023 14:43:00').getTime() <= new Date().getTime()) {
+      alert("Expired!!!");
+    } else {
+      handleMint()
+    }
   }
 
   const handleClaimNFT = () => {
@@ -49,28 +58,47 @@ const AquaDream: React.FC<Props> = () => {
     }
   }, [nftBalance, totalSupply, tokenOfOwnerByIndex, dataNFT, isClaimed, account])
 
+
   return (
     <CsFlexContainer width="100%" flexDirection="column" mt="8rem" height="auto" minHeight="80vh">
-      {account != null && dataNFT != null ? (
+      {account != null ? (
         <CsFlex>
-          <CardAquaDream
-            nftImage={dataNFT.image}
-            nftPrice={20}
-            nftType={dataNFT.nftType}
-            nftName={dataNFT.name}
-            nftBalance={nftBalance}
-            ID={tokenOfOwnerByIndex}
-            onClaimNFT={handleClaimNFT}
-            isClaimed={isClaimed}
-            acc={account}
-          />
-          <MainContent>
-            <h1>Total: {totalSupply} minted</h1>
-            <img src="/images/myimages/logo.png" alt="" />
-            <p>Exploring the Deep Sea of BASE NFTs</p>
-
-            <AnimationButton disabled>Minted</AnimationButton>
-          </MainContent>
+          {
+            (nftBalance !== 0) ? (
+              <>
+                <CardAquaDream
+                  nftImage={dataNFT.image}
+                  nftPrice={20}
+                  nftType={dataNFT.nftType}
+                  nftName={dataNFT.name}
+                  nftBalance={nftBalance}
+                  ID={tokenOfOwnerByIndex}
+                  onClaimNFT={handleClaimNFT}
+                  isClaimed={isClaimed}
+                  acc={account} />
+                <MainContent>
+                  <h1>Total: {totalSupply} minted</h1>
+                  <p>Exploring the Deep Sea of BASE NFTs</p>
+                  <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+                  <AnimationButton disabled>Minted</AnimationButton>
+                </MainContent>
+              </>
+            ) : (
+              <>
+                <CardAquaDream
+                  nftImage="/images/cardSecret.jpg"
+                  nftName="Card AquaDream"
+                  acc={account}
+                />
+                <MainContent>
+                  <h1>Total: {totalSupply} minted</h1>
+                  <p>Exploring the Deep Sea of BASE NFTs</p>
+                  <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+                  <AnimationButton onClick={handleMintNFT}>Mint NFT</AnimationButton>
+                </MainContent>
+              </>
+            )
+          }
         </CsFlex>
       ) : (
         <CsFlex>
@@ -81,8 +109,8 @@ const AquaDream: React.FC<Props> = () => {
           />
           <MainContent>
             <h1>Total: {totalSupply} minted</h1>
-            <img src="/images/myimages/logo.png" alt="" />
             <p>Exploring the Deep Sea of BASE NFTs</p>
+            <CountdownTimer targetDate={dateTimeAfterThreeDays} />
             <AnimationButton disabled>Connect wallet to mint</AnimationButton>
           </MainContent>
         </CsFlex>
@@ -167,7 +195,7 @@ const MainContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  // align-items: center;
   width: auto;
   height: auto;
   background: transparent;
@@ -180,9 +208,11 @@ const MainContent = styled.div`
   position: relative;
   color: #000000;
   h1 {
-    font-size: 30px;
-    color: #ffffff;
-    position: relative;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    color: #fff;
   }
 
   img {

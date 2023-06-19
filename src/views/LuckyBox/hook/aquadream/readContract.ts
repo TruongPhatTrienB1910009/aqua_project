@@ -63,7 +63,7 @@ export const TotalSupply = (chainId: number) => {
 }
 
 export const TokenOfOwnerByIndex = (account, chainId: number) => {
-  const [tokenOfOwnerByIndex, settokenOfOwnerByIndex] = useState(0)
+  const [tokenOfOwnerByIndex, settokenOfOwnerByIndex] = useState(-1)
   useEffect(() => {
     const gettokenOfOwnerByIndex = async () => {
       try {

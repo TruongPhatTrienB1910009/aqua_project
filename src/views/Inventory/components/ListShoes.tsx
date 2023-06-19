@@ -24,8 +24,8 @@ export const Loading = () => {
       border: 8px solid rgba(0, 0, 0, 0.1);
       border-top-color: #07d669;
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 20px;
+      height: 20px;
       animation: ${rotation} 1s ease-in-out infinite;
       margin: 0 auto;
     `;

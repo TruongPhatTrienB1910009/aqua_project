@@ -28,7 +28,9 @@ export const BalanceOf = (account: string, chainId: number) => {
       }
     }
 
-    getBalanceOf()
+    if (account) {
+      getBalanceOf()
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, chainId])
@@ -61,7 +63,7 @@ export const TotalSupply = (chainId: number) => {
 }
 
 export const TokenOfOwnerByIndex = (account, chainId: number) => {
-  const [tokenOfOwnerByIndex, settokenOfOwnerByIndex] = useState(0)
+  const [tokenOfOwnerByIndex, settokenOfOwnerByIndex] = useState(-1)
   useEffect(() => {
     const gettokenOfOwnerByIndex = async () => {
       try {
@@ -80,7 +82,9 @@ export const TokenOfOwnerByIndex = (account, chainId: number) => {
       }
     }
 
-    gettokenOfOwnerByIndex()
+    if (account) {
+      gettokenOfOwnerByIndex()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, chainId])
   return { tokenOfOwnerByIndex }
@@ -100,7 +104,6 @@ export const IsClaimed = (chainId: number, ID: any) => {
         ]
         const idRunBox = await multicall(aquadream, callBoxId, chainId)
         setIsClaimed(idRunBox[0][0])
-        console.log('idrunbox', idRunBox)
       } catch (e) {
         console.log(e)
       }

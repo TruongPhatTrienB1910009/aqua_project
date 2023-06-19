@@ -44,5 +44,5 @@ debug.log*
 .sentryclirc
 
 # turbo
-.turbo
-.vercel
+# .turbo
+# .vercel

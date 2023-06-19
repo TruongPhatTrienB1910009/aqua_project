@@ -13,10 +13,10 @@ const FarmTabButtons: React.FC<React.PropsWithChildren<FarmTabButtonsProps>> = (
   const { t } = useTranslation()
 
   const handleStakeInFinishedOptionChange = (option: OptionProps): void => {
-    if(option.value === false){
+    if (option.value === false) {
       router.push('/farms')
     }
-    if(option.value){
+    if (option.value) {
       router.push('/farms/history')
     }
   }
@@ -43,18 +43,18 @@ const FarmTabButtons: React.FC<React.PropsWithChildren<FarmTabButtonsProps>> = (
   return (
     <Wrapper>
       <Select
-          options={[
-              {
-                  label: t('Live'),
-                  value: false,
-              },
-              {
-                  label: t('Finished'),
-                  value: true,
-              }
-          ]}
-          onChange={handleStakeInFinishedOptionChange}
-            />
+        options={[
+          {
+            label: t('Live'),
+            value: false,
+          },
+          {
+            label: t('Finished'),
+            value: true,
+          }
+        ]}
+        onChange={handleStakeInFinishedOptionChange}
+      />
     </Wrapper>
   )
 }

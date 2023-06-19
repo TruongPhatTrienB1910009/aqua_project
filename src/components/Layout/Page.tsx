@@ -58,7 +58,7 @@ const mycss = `.bg {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Change the color and opacity as needed */
+  background-color: rgba(0, 0, 0, 0.3); /* Change the color and opacity as needed */
 }`
 
 const Page: React.FC<React.PropsWithChildren<PageProps>> = ({ children, symbol, ...props }) => {

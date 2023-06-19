@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useEffect, useState } from 'react'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import styled, { css, keyframes } from 'styled-components'
@@ -9,6 +10,7 @@ import { BalanceOf, TotalSupply, TokenOfOwnerByIndex, IsClaimed } from '../hook/
 import { useMintNft } from '../hook/aquadream/useMintNft'
 import { GetDataNFT } from '../hook/aquadream/fetchData'
 import { useClaim } from '../hook/aquadream/useClaim'
+import CountdownTimer from "./timer/CountdownTimer";
 
 interface Props {
   filter?: number
@@ -30,8 +32,15 @@ const AquaDream: React.FC<Props> = () => {
   const { dataNFT } = GetDataNFT(tokenOfOwnerByIndex)
   const { isClaimed } = IsClaimed(chainId, tokenOfOwnerByIndex)
 
+  const startDate = new Date('June 19, 2023 14:43:00');
+  const dateTimeAfterThreeDays = startDate;
+
   const handleMintNFT = () => {
-    handleMint()
+    if (new Date('June 19, 2023 14:43:00').getTime() <= new Date().getTime()) {
+      alert("Expired!!!");
+    } else {
+      handleMint()
+    }
   }
 
   const handleClaimNFT = () => {
@@ -49,49 +58,59 @@ const AquaDream: React.FC<Props> = () => {
     }
   }, [nftBalance, totalSupply, tokenOfOwnerByIndex, dataNFT, isClaimed, account])
 
+
   return (
-    <CsFlexContainer width="100%" flexDirection="column" mt="6rem" height="auto" minHeight="50vh">
+    <CsFlexContainer width="100%" flexDirection="column" mt="8rem" height="auto" minHeight="80vh">
       {account != null ? (
         <CsFlex>
-          <CardAquaDream
-            nftImage={dataNFT.image}
-            nftPrice={20}
-            nftType={dataNFT.nftType}
-            nftName={dataNFT.name}
-            nftBalance={nftBalance}
-            ID={tokenOfOwnerByIndex}
-            onClaimNFT={handleClaimNFT}
-            isClaimed={isClaimed}
-            acc={account}
-          />
-          {nftBalance === 0 ? (
-            <MainContent>
-              <h1>Total: {totalSupply} minted</h1>
-              {/* <img src="/images/help.png" alt="" /> */}
-              <p>Exploring the Deep Sea of BASE NFTs</p>
-              {pendingMint ? <Loading /> : <AnimationButton onClick={handleMintNFT}>Mint NFT</AnimationButton>}
-            </MainContent>
-          ) : (
-            <MainContent>
-              <h1>Total: {totalSupply} minted</h1>
-              {/* <img src="/images/help.png" alt="" /> */}
-              <p>Exploring the Deep Sea of BASE NFTs</p>
-              <AnimationButton disabled>Minted</AnimationButton>
-            </MainContent>
-          )}
+          {
+            (nftBalance !== 0) ? (
+              <>
+                <CardAquaDream
+                  nftImage={dataNFT.image}
+                  nftPrice={20}
+                  nftType={dataNFT.nftType}
+                  nftName={dataNFT.name}
+                  nftBalance={nftBalance}
+                  ID={tokenOfOwnerByIndex}
+                  onClaimNFT={handleClaimNFT}
+                  isClaimed={isClaimed}
+                  acc={account} />
+                <MainContent>
+                  <h1>Total: {totalSupply} minted</h1>
+                  <p>Exploring the Deep Sea of BASE NFTs</p>
+                  <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+                  <AnimationButton disabled>Minted</AnimationButton>
+                </MainContent>
+              </>
+            ) : (
+              <>
+                <CardAquaDream
+                  nftImage="/images/cardSecret.jpg"
+                  nftName="Card AquaDream"
+                  acc={account}
+                />
+                <MainContent>
+                  <h1>Total: {totalSupply} minted</h1>
+                  <p>Exploring the Deep Sea of BASE NFTs</p>
+                  <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+                  <AnimationButton onClick={handleMintNFT}>Mint NFT</AnimationButton>
+                </MainContent>
+              </>
+            )
+          }
         </CsFlex>
       ) : (
         <CsFlex>
           <CardAquaDream
             nftImage="/images/cardSecret.jpg"
             nftName="Card AquaDream"
-            // nftBalance={nftBalance}
             acc={account}
           />
           <MainContent>
             <h1>Total: {totalSupply} minted</h1>
-            {/* <img src="/images/myimages/logo.png" alt="" /> */}
             <p>Exploring the Deep Sea of BASE NFTs</p>
+            <CountdownTimer targetDate={dateTimeAfterThreeDays} />
             <AnimationButton disabled>Connect wallet to mint</AnimationButton>
           </MainContent>
         </CsFlex>
@@ -165,6 +184,8 @@ const CsFlex = styled(Flex)`
   }
 `
 const CsFlexContainer = styled(Flex)`
+  alignItems: center;
+  justify-content: space-between;
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     align-items: center;
   }
@@ -174,22 +195,24 @@ const MainContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  width: 600px;
-  height: 300px;
+  // align-items: center;
+  width: auto;
+  height: auto;
   background: transparent;
-  //   border: 7px solid #ccc;
-  //   box-shadow: 0 0 9px rgba(0, 0, 0, 3.3);
-  //   border-radius: 10px;
+    // border: 7px solid #ccc;
+    // box-shadow: 0 0 9px rgba(0, 0, 0, 3.3);
+    // border-radius: 10px;
   padding: 20px;
-  right: 50px;
-  bottom: 0px;
+  // right: 50px;
+  // bottom: 0px;
   position: relative;
   color: #000000;
   h1 {
-    font-size: 24px;
-    color: #ffffff;
-    position: relative;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    color: #fff;
   }
 
   img {
@@ -198,29 +221,30 @@ const MainContent = styled.div`
   }
 
   p {
-    width: 644px;
-    height: 140px;
+    width: 100%;
+    // height: 140px;
     left: 625px;
     top: 442px;
 
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 600;
-    font-size: 60px;
+    font-size: 40px;
     color: #ffffff;
-    line-height: 70px;
+    line-height: 60px;
+    margin-bottom: 20px;
   }
 `
 
 const AnimationButton = styled.button`
-  width: 120px;
-  padding: 15px 5px;
+  width: fit-content;
+  padding: 15px 15px;
   cursor: pointer;
   color: #fff;
   transition: all 0.5s;
-  right: 260px;
-  bottom: 10px;
-  position: relative;
+  // right: 260px;
+  // bottom: 0px;
+  // position: relative;
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 700;
@@ -234,7 +258,7 @@ const AnimationButton = styled.button`
   text-transform: capitalize;
   box-shadow: 0px 9px 9px rgba(0, 0, 0, 5.25);
   border-radius: 15px;
-
+  margin: 10px 0;
   color: #ffffff;
   background: linear-gradient(
     191.32deg,
@@ -246,7 +270,7 @@ const AnimationButton = styled.button`
     #481cbb 131.68%,
     #142d8e 131.68%
   );
-  border-radius: 21.5692px;
+  border-radius: 20px;
   border: none;
   //   &::before {
   //     content: '';
@@ -265,19 +289,19 @@ const AnimationButton = styled.button`
   //     transform: scale(0.5, 0.5);
   //   }
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0;
-    transition: all 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    transform: scale(1.2, 1.2);
-  }
+  // &::after {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   z-index: 1;
+  //   opacity: 0;
+  //   transition: all 0.3s;
+  //   border: 1px solid rgba(255, 255, 255, 0.5);
+  //   transform: scale(1.2, 1.2);
+  // }
 
   //   &:hover::after {
   //     opacity: 1;
@@ -290,7 +314,7 @@ const AnimationButton = styled.button`
       opacity: 0.6;
       cursor: not-allowed;
       background: linear-gradient(101.61deg, #ffd9b7 -14.72%, #ff6543 66.97%);
-      width: 100px;
+      width: fit-content;
       right: 270px;
     `}
 `

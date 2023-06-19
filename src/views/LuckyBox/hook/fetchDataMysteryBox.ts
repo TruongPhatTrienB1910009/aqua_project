@@ -8,7 +8,6 @@ import marketPlaceAbi from "config/abi/marketPlaceAbi.json"
 import bighunterToken from "config/abi/bighunterToken.json"
 import BigNumber from "bignumber.js";
 import { useEffect, useState } from "react";
-import { set } from "lodash";
 
 export const FetchDataRunBoxIsOpen = (idMysteryBox, chainId: number) => {
   const [dataBox, setDataBox] = useState({

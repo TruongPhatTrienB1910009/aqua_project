@@ -29,7 +29,7 @@ module.exports = {
       customSyntax: '@stylelint/postcss-css-in-js',
       rules: {
         ...commonRules,
-        'function-no-unknown': null,
+        'function-no-unknown': null
       },
     },
   ],

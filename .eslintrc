@@ -10,11 +10,17 @@
   "extends": [
     "@pancakeswap/eslint-config-pancake",
     "plugin:react/jsx-runtime",
-    "plugin:@next/next/recommended"
+    "plugin:@next/next/recommended",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "@typescript-eslint/no-var-requires": 0,
     "import/no-unresolved": 0,
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-unused-expressions": "off",
     "no-console": [
       "warn",
       {

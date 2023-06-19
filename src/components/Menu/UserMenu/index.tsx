@@ -24,7 +24,7 @@ const UserMenu = () => {
   const { hasPendingTransactions, pendingNumber } = usePendingTransactions()
   const [userMenuText, setUserMenuText] = useState<string>('')
   const [userMenuVariable, setUserMenuVariable] = useState<UserMenuVariant>('default')
-  const avatarSrc =  undefined
+  const avatarSrc = undefined
   useEffect(() => {
     if (hasPendingTransactions) {
       setUserMenuText(t('%num% Pending', { num: pendingNumber }))
@@ -81,6 +81,8 @@ export default UserMenu
 const CsConnectWalletButton = styled(ConnectWalletButton)`
   height: 46px;
   background: transparent;
-  color:${({ theme }) => theme.colors.text};
+  // color:${({ theme }) => theme.colors.text};
+  color: #fff;
   border:2px solid ${({ theme }) => theme.colors.cardBorder};
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 `

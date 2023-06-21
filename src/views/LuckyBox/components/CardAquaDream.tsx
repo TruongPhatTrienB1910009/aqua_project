@@ -26,8 +26,8 @@ interface PropsCard {
   onClaimNFT?: any
   balanceOfToken?: number
   isClaimed?: any
-  nftBalance?: any
   acc?: any
+  nftBalance?: any
 }
 
 const CardAquaDream: React.FC<PropsCard> = ({
@@ -47,7 +47,7 @@ const CardAquaDream: React.FC<PropsCard> = ({
   return (
     <>
       <Container>
-        {nftBalance === 1 && acc != null && Number(nftType) !== 0 ? (
+        {nftBalance > 0 && acc != null && Number(nftType) !== 0 ? (
           <CustomCard>
             <ImgShoes src={nftImage} alt="Image Box" />
             <CustomText>{nftName}</CustomText>

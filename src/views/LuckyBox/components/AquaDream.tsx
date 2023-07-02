@@ -64,7 +64,7 @@ const AquaDream: React.FC<Props> = () => {
       {account != null ? (
         <CsFlex>
           {
-            (nftBalance !== 0) ? (
+            (dataNFT !== null) ? (
               <>
                 <CardAquaDream
                   nftImage={dataNFT.image}
@@ -75,7 +75,8 @@ const AquaDream: React.FC<Props> = () => {
                   ID={tokenOfOwnerByIndex}
                   onClaimNFT={handleClaimNFT}
                   isClaimed={isClaimed}
-                  acc={account} />
+                  acc={account}
+                />
                 <MainContent>
                   <h1>Total: {totalSupply} minted</h1>
                   <p>Exploring the Deep Sea of BASE NFTs</p>
